@@ -13,7 +13,7 @@
   <style>
     body {
       font-family: 'Outfit', sans-serif;
-      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d1e 55%, #020617 100%);
+      background: linear-gradient(180deg, #17153b 0%, #090d1e 45%, #020617 100%);
       color: #f8fafc;
       overflow-x: hidden;
       min-height: 100vh;
@@ -23,32 +23,13 @@
       font-family: 'Fredoka', sans-serif;
     }
 
-    /* Animated Stadium Spotlight Beams */
-    @keyframes beamSweepLeft {
-      0%, 100% { transform: rotate(-28deg) scaleY(1); opacity: 0.22; }
-      50% { transform: rotate(-10deg) scaleY(1.1); opacity: 0.4; }
-    }
-    @keyframes beamSweepRight {
-      0%, 100% { transform: rotate(28deg) scaleY(1); opacity: 0.22; }
-      50% { transform: rotate(10deg) scaleY(1.1); opacity: 0.4; }
-    }
-    .spotlight-left {
-      transform-origin: top center;
-      animation: beamSweepLeft 6s ease-in-out infinite;
-    }
-    .spotlight-right {
-      transform-origin: top center;
-      animation: beamSweepRight 6s ease-in-out infinite;
-    }
-
-    /* Floating Party Elements */
+    /* Lightweight GPU-friendly Floating Icons */
     @keyframes floatDrift {
-      0%, 100% { transform: translateY(0px) rotate(-4deg) scale(1); }
-      50% { transform: translateY(-22px) rotate(6deg) scale(1.06); }
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+      50% { transform: translate3d(0, -16px, 0) rotate(5deg); }
     }
-    .float-1 { animation: floatDrift 4.5s ease-in-out infinite; }
-    .float-2 { animation: floatDrift 5.8s ease-in-out infinite 0.8s; }
-    .float-3 { animation: floatDrift 3.9s ease-in-out infinite 1.4s; }
+    .float-1 { animation: floatDrift 4.5s ease-in-out infinite; will-change: transform; }
+    .float-2 { animation: floatDrift 5.5s ease-in-out infinite 0.8s; will-change: transform; }
 
     /* Shimmering Gold Foil Text */
     .shimmer-gold {
@@ -56,121 +37,103 @@
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shimmerMove 2.8s linear infinite;
+      animation: shimmerMove 3s linear infinite;
     }
     @keyframes shimmerMove {
       to { background-position: 200% center; }
     }
 
-    /* 3D Envelope Cover */
+    /* 3D Envelope Cover (No heavy backdrop-filter) */
     .perspective-1200 { perspective: 1200px; }
     #envelope-overlay {
-      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+      will-change: opacity, transform;
     }
     #envelope-overlay.opened {
       opacity: 0;
-      transform: scale(1.18);
+      transform: scale(1.1);
       pointer-events: none;
     }
     .envelope-box {
-      background: linear-gradient(145deg, #1d4ed8 0%, #312e81 48%, #0f172a 100%);
-      border: 3px solid rgba(251, 191, 36, 0.75);
-      box-shadow: 0 0 50px rgba(59, 130, 246, 0.4), 0 0 90px rgba(251, 191, 36, 0.25);
-      transition: transform 0.18s ease-out;
+      background: linear-gradient(145deg, #1d4ed8 0%, #312e81 50%, #0f172a 100%);
+      border: 3px solid rgba(251, 191, 36, 0.8);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
     }
 
-    /* Scroll Reveal Animations */
-    .reveal-card {
-      opacity: 0;
-      transform: translateY(28px) scale(0.97);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Crisp Solid-Gradient Cards (Zero Scroll Lag) */
+    .card-surface {
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.98) 100%);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     }
-    .reveal-card.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .card-details {
+      background: linear-gradient(145deg, #172554 0%, #0f172a 100%);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
-
-    /* Glowing Jumbotron & Gallery Borders */
-    @keyframes borderPulse {
-      0%, 100% { box-shadow: 0 0 22px rgba(251, 191, 36, 0.35), inset 0 0 15px rgba(59, 130, 246, 0.2); }
-      50% { box-shadow: 0 0 38px rgba(59, 130, 246, 0.6), inset 0 0 22px rgba(251, 191, 36, 0.3); }
-    }
-    .stadium-glow { animation: borderPulse 3s infinite; }
 
     /* Candle Flames & Smoke */
     @keyframes flicker {
       0%, 100% { transform: scale(1) rotate(-3deg); }
-      50% { transform: scale(1.14) rotate(3deg); }
+      50% { transform: scale(1.12) rotate(3deg); }
     }
     .flame {
       background: radial-gradient(circle at 50% 80%, #fef08a 15%, #f59e0b 55%, #ef4444 95%);
       border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
-      box-shadow: 0 0 14px #fbbf24, 0 0 24px #f97316;
-      animation: flicker 0.45s infinite alternate;
+      box-shadow: 0 0 10px #fbbf24;
+      animation: flicker 0.5s infinite alternate;
       transform-origin: bottom center;
     }
     .flame.blown-out {
       opacity: 0;
       transform: scale(0) translateY(-10px);
-      transition: all 0.3s ease-out;
+      transition: all 0.25s ease-out;
     }
     @keyframes smokeRise {
       0% { opacity: 0.85; transform: translateY(0) scale(0.6); }
-      100% { opacity: 0; transform: translateY(-28px) scale(1.7); }
+      100% { opacity: 0; transform: translateY(-24px) scale(1.5); }
     }
-    .smoke-puff { animation: smokeRise 1s ease-out forwards; }
+    .smoke-puff { animation: smokeRise 0.85s ease-out forwards; }
 
     /* Holographic VIP Pass */
     .holo-ticket {
-      background: linear-gradient(135deg, rgba(30, 58, 138, 0.65) 0%, rgba(251, 191, 36, 0.22) 50%, rgba(15, 23, 42, 0.85) 100%);
-      backdrop-filter: blur(16px);
-      border: 2px solid rgba(251, 191, 36, 0.75);
+      background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #0f172a 100%);
+      border: 2px solid rgba(251, 191, 36, 0.8);
     }
 
     /* Penalty Shootout Ball */
-    #soccer-ball {
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    #goalie {
-      transition: transform 0.45s ease-out;
-    }
+    #soccer-ball { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    #goalie { transition: transform 0.4s ease-out; }
   </style>
 </head>
 <body class="antialiased selection:bg-amber-400 selection:text-slate-950" onclick="spawnClickSparkle(event)">
 
-  <!-- ANIMATED STADIUM SPOTLIGHTS & FLOATING PARTY ICONS -->
+  <!-- LIGHTWEIGHT FLOATING PARTY ICONS -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="spotlight-left absolute -top-20 left-1/4 w-48 h-[120vh] bg-gradient-to-b from-blue-400/30 via-blue-500/5 to-transparent blur-2xl"></div>
-    <div class="spotlight-right absolute -top-20 right-1/4 w-48 h-[120vh] bg-gradient-to-b from-amber-300/30 via-amber-500/5 to-transparent blur-2xl"></div>
-
-    <div class="absolute top-14 left-5 text-3xl opacity-35 float-1">⚽</div>
-    <div class="absolute top-24 right-7 text-4xl opacity-40 float-2">🎈</div>
-    <div class="absolute top-[38%] left-4 text-3xl opacity-30 float-3">🏆</div>
-    <div class="absolute top-[55%] right-5 text-3xl opacity-35 float-1">🕷️</div>
-    <div class="absolute bottom-32 left-6 text-4xl opacity-35 float-2">🎉</div>
-    <div class="absolute bottom-16 right-8 text-3xl opacity-30 float-3">⭐</div>
+    <div class="absolute top-14 left-5 text-3xl opacity-30 float-1">⚽</div>
+    <div class="absolute top-24 right-7 text-3xl opacity-35 float-2">🎈</div>
+    <div class="absolute top-[45%] left-4 text-3xl opacity-25 float-1">🏆</div>
+    <div class="absolute bottom-24 right-6 text-3xl opacity-30 float-2">🎉</div>
   </div>
 
   <!-- FLOATING MUSIC & FIREWORKS BAR -->
   <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
-    <button onclick="launchFireworks(event)" class="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-full text-xs font-extrabold shadow-lg hover:scale-105 active:scale-95 transition">
+    <button onclick="launchFireworks(event)" class="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-full text-xs font-extrabold shadow-lg active:scale-95 transition">
       🎆 Fireworks!
     </button>
-    <button id="soundToggle" onclick="toggleSound(event)" class="bg-slate-900/90 backdrop-blur-md border border-amber-400/50 text-amber-300 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg hover:scale-105 transition">
+    <button id="soundToggle" onclick="toggleSound(event)" class="bg-slate-900 border border-amber-400/50 text-amber-300 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg transition">
       <span id="soundIcon">🔊</span> <span id="soundLabel">Music ON</span>
     </button>
   </div>
 
   <!-- 3D ENVELOPE OPENING COVER -->
-  <div id="envelope-overlay" class="fixed inset-0 z-40 flex flex-col items-center justify-center p-5 bg-slate-950/95 backdrop-blur-xl">
+  <div id="envelope-overlay" class="fixed inset-0 z-40 flex flex-col items-center justify-center p-5 bg-slate-950">
     <div class="max-w-md w-full perspective-1200">
-      <div id="tilt-envelope" class="envelope-box rounded-3xl p-7 text-center relative overflow-hidden">
+      <div class="envelope-box rounded-3xl p-7 text-center relative overflow-hidden">
         <div class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/50 text-amber-300 px-4 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase mb-5">
           <span>🎟️ VIP ALL-ACCESS PASS</span>
         </div>
 
         <div class="relative w-32 h-32 mx-auto mb-5">
-          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-blue-500 animate-spin" style="animation-duration: 6s;"></div>
+          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-blue-500"></div>
           <img src="./IMG_8437 2.jpg" alt="Atharva" class="relative w-full h-full object-cover object-right rounded-full p-1 bg-slate-950" />
           <div class="absolute -bottom-1 -right-1 bg-amber-400 text-slate-950 font-display font-bold text-base w-10 h-10 rounded-full flex items-center justify-center border-2 border-slate-950 shadow-lg">
             7!
@@ -182,10 +145,10 @@
           <span class="text-white">7TH BIRTHDAY!</span>
         </h1>
         <p class="text-blue-200 text-sm mb-6">
-          World Cup • WWE SmackDown • Superhero Celebration
+          Saturday, Dec 12, 2026 • 1:00 PM
         </p>
 
-        <button onclick="openInvitation(event)" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-bold text-lg tracking-wide shadow-xl hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+        <button onclick="openInvitation(event)" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-bold text-lg tracking-wide shadow-xl active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
           <span>🎁 TAP TO OPEN INVITE</span>
         </button>
 
@@ -197,11 +160,11 @@
   </div>
 
   <!-- MAIN INVITATION CONTENT -->
-  <main class="relative z-10 max-w-lg mx-auto px-4 pt-16 pb-24 space-y-7">
+  <main class="relative z-10 max-w-lg mx-auto px-4 pt-16 pb-24 space-y-6">
 
     <!-- 1. HERO TITLE BANNER -->
-    <section class="text-center space-y-3 reveal-card visible">
-      <div class="inline-flex items-center gap-2 bg-blue-600/30 border border-blue-400/40 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider uppercase text-amber-300 shadow">
+    <section class="text-center space-y-2.5">
+      <div class="inline-flex items-center gap-2 bg-blue-600/30 border border-blue-400/40 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider uppercase text-amber-300">
         <span>⭐ LEVEL 7 UNLOCKED • DEC 12, 2026 ⭐</span>
       </div>
 
@@ -210,37 +173,101 @@
         <span class="shimmer-gold">ATHARVA'S 7TH!</span>
       </h1>
 
-      <p class="text-slate-300 text-sm sm:text-base max-w-sm mx-auto">
-        Join <strong class="text-white">Ashish, Shweta & Atharva</strong> for an unforgettable afternoon of games, music, cake & celebration!
+      <p class="text-slate-300 text-sm max-w-sm mx-auto">
+        Join <strong class="text-white">Ashish, Shweta & Atharva</strong> for an afternoon of games, music, cake & celebration!
       </p>
+    </section>
 
-      <div class="flex flex-wrap justify-center gap-2 pt-1">
-        <span class="bg-pink-500/15 border border-pink-400/40 text-pink-300 text-xs font-bold px-3 py-1 rounded-full">⚽ Messi 10 & World Cup</span>
-        <span class="bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">🏆 WWE SmackDown Fan</span>
-        <span class="bg-blue-500/15 border border-blue-400/40 text-blue-300 text-xs font-bold px-3 py-1 rounded-full">🕷️ Superhero Mode</span>
+    <!-- 2. PARTY DETAILS, CALENDAR & COUNTDOWN (RIGHT AT THE TOP!) -->
+    <section class="card-details border-2 border-blue-400/50 rounded-3xl p-5 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-700/80 pb-2.5">
+        <h2 class="font-display font-bold text-xl text-white">📍 When & Where</h2>
+        <a href="#rsvp-section" class="bg-amber-400 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full shadow hover:brightness-110 transition">
+          🎟️ Jump to RSVP ↓
+        </a>
+      </div>
+
+      <div class="space-y-3.5">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/40 flex items-center justify-center text-lg shrink-0">
+            🗓️
+          </div>
+          <div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Date & Kick-Off Time</div>
+            <div class="font-display font-bold text-lg text-white leading-tight">Saturday, December 12, 2026</div>
+            <div class="text-xs text-slate-300 mt-0.5">Starts at <strong class="text-white">1:00 PM EST</strong> • Cake, Games & Feast!</div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-400/15 border border-blue-400/40 flex items-center justify-center text-lg shrink-0">
+            🏢
+          </div>
+          <div class="flex-1">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Party Venue</div>
+            <div class="font-display font-bold text-lg text-white leading-tight">741 Sheppard Avenue West</div>
+            <div class="text-xs text-slate-300">North York, ON, M3H 0C9</div>
+            <div class="mt-1.5 inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-extrabold text-xs px-2.5 py-0.5 rounded-md">
+              <span>🔔 INTERCOM BUZZ: 3020</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary Calendar & Maps Action Bar -->
+      <div class="grid grid-cols-3 gap-2 pt-1">
+        <button onclick="downloadICS(event)" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 px-2 rounded-xl flex items-center justify-center gap-1 shadow transition">
+          <span>📅 Add Calendar</span>
+        </button>
+        <a href="https://www.google.com/maps/search/?api=1&query=741+Sheppard+Avenue+West+North+York+ON+M3H+0C9" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs py-3 px-2 rounded-xl flex items-center justify-center gap-1 shadow transition">
+          <span>🗺️ Google Maps</span>
+        </a>
+        <button onclick="copyAddress(event)" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold text-xs py-3 px-2 rounded-xl flex items-center justify-center gap-1 transition">
+          <span>📋 Copy Info</span>
+        </button>
+      </div>
+
+      <!-- Compact Countdown Strip -->
+      <div class="grid grid-cols-4 gap-2 text-center bg-slate-950/80 p-2.5 rounded-2xl border border-slate-800">
+        <div>
+          <div id="cd-days" class="font-display font-bold text-xl text-amber-400">--</div>
+          <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Days</div>
+        </div>
+        <div>
+          <div id="cd-hours" class="font-display font-bold text-xl text-white">--</div>
+          <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Hours</div>
+        </div>
+        <div>
+          <div id="cd-mins" class="font-display font-bold text-xl text-white">--</div>
+          <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Mins</div>
+        </div>
+        <div>
+          <div id="cd-secs" class="font-display font-bold text-xl text-blue-400">--</div>
+          <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Secs</div>
+        </div>
       </div>
     </section>
 
-    <!-- 2. INTERACTIVE CHAMPION PHOTO GALLERY CAROUSEL (TOUCH-SWIPE ENABLED) -->
-    <section class="reveal-card bg-slate-900/80 backdrop-blur-md border-2 border-amber-400/45 rounded-3xl p-4 shadow-2xl stadium-glow">
+    <!-- 3. INTERACTIVE CHAMPION PHOTO GALLERY CAROUSEL (TOUCH-SWIPE ENABLED) -->
+    <section class="card-surface border-2 border-amber-400/45 rounded-3xl p-4">
       <div class="flex items-center justify-between px-1 mb-3">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
-          <span>📸 Atharva's Champion Gallery</span>
+        <span class="text-xs font-extrabold uppercase tracking-wider text-amber-300">
+          📸 Atharva's Champion Gallery
         </span>
         <span id="gallery-counter" class="text-xs font-bold text-slate-400 bg-slate-950 px-2.5 py-0.5 rounded-full border border-slate-800">1 / 4</span>
       </div>
 
-      <div id="gallery-touch-zone" class="relative rounded-2xl overflow-hidden bg-slate-950 aspect-[4/5] border border-slate-700/80 group select-none touch-pan-y">
-        <img id="gallery-main-img" src="./atharvawithmessidress.jpg" alt="Atharva Highlight" onclick="openLightbox()" class="w-full h-full object-cover transition-all duration-500 cursor-zoom-in" />
+      <div id="gallery-touch-zone" class="relative rounded-2xl overflow-hidden bg-slate-950 aspect-[4/5] border border-slate-800 select-none touch-pan-y">
+        <img id="gallery-main-img" src="./atharvawithmessidress.jpg" alt="Atharva Highlight" onclick="openLightbox()" class="w-full h-full object-cover transition-opacity duration-300 cursor-zoom-in" />
 
-        <button onclick="changeSlide(-1, event)" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/75 border border-white/20 text-white font-bold flex items-center justify-center hover:bg-amber-400 hover:text-slate-950 transition shadow-lg">
+        <button onclick="changeSlide(-1, event)" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/80 border border-white/20 text-white font-bold flex items-center justify-center hover:bg-amber-400 hover:text-slate-950 transition shadow-lg">
           ‹
         </button>
-        <button onclick="changeSlide(1, event)" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/75 border border-white/20 text-white font-bold flex items-center justify-center hover:bg-amber-400 hover:text-slate-950 transition shadow-lg">
+        <button onclick="changeSlide(1, event)" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/80 border border-white/20 text-white font-bold flex items-center justify-center hover:bg-amber-400 hover:text-slate-950 transition shadow-lg">
           ›
         </button>
 
-        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-4">
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent p-4">
           <span id="gallery-badge" class="bg-pink-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase tracking-wider">⚽ World Cup Final Vibes</span>
           <h3 id="gallery-title" class="font-display font-bold text-xl text-white mt-1">Messi #10 Ready for Kick-Off!</h3>
           <p class="text-xs text-slate-300">Swipe left/right or tap photo to expand</p>
@@ -248,75 +275,75 @@
       </div>
 
       <div class="grid grid-cols-4 gap-2.5 mt-3">
-        <button onclick="selectSlide(0, event)" id="thumb-0" class="thumb-btn rounded-xl overflow-hidden aspect-square border-2 border-amber-400 ring-2 ring-amber-400/40 transition">
-          <img src="./atharvawithmessidress.jpg" class="w-full h-full object-cover" alt="Messi 10" />
+        <button onclick="selectSlide(0, event)" id="thumb-0" class="thumb-btn rounded-xl overflow-hidden aspect-square border-2 border-amber-400 transition">
+          <img src="./atharvawithmessidress.jpg" loading="lazy" class="w-full h-full object-cover" alt="Messi 10" />
         </button>
         <button onclick="selectSlide(1, event)" id="thumb-1" class="thumb-btn rounded-xl overflow-hidden aspect-square border-2 border-transparent opacity-65 hover:opacity-100 transition">
-          <img src="./IMG_8437 2.jpg" class="w-full h-full object-cover object-right" alt="World Cup Trophy" />
+          <img src="./IMG_8437 2.jpg" loading="lazy" class="w-full h-full object-cover object-right" alt="World Cup Trophy" />
         </button>
         <button onclick="selectSlide(2, event)" id="thumb-2" class="thumb-btn rounded-xl overflow-hidden aspect-square border-2 border-transparent opacity-65 hover:opacity-100 transition">
-          <img src="./IMG_3808.jpg" class="w-full h-full object-cover object-top" alt="Spider-Man" />
+          <img src="./IMG_3808.jpg" loading="lazy" class="w-full h-full object-cover object-top" alt="Spider-Man" />
         </button>
         <button onclick="selectSlide(3, event)" id="thumb-3" class="thumb-btn rounded-xl overflow-hidden aspect-square border-2 border-transparent opacity-65 hover:opacity-100 transition">
-          <img src="./familyphoto.jpg" class="w-full h-full object-cover object-top" alt="Family" />
+          <img src="./familyphoto.jpg" loading="lazy" class="w-full h-full object-cover object-top" alt="Family" />
         </button>
       </div>
     </section>
 
-    <!-- 3. WWE SMACKDOWN TORONTO ARENA JUMBOTRON VIDEO & MUSIC ANTHEM -->
-    <section class="reveal-card bg-gradient-to-b from-blue-950/90 to-slate-900/95 backdrop-blur-md border-2 border-blue-400/50 rounded-3xl p-4 shadow-2xl">
+    <!-- 4. WWE SMACKDOWN TORONTO ARENA JUMBOTRON VIDEO & MUSIC ANTHEM -->
+    <section class="card-details border-2 border-blue-400/50 rounded-3xl p-4">
       <div class="flex items-center justify-between mb-3 px-1">
         <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-300">WWE SmackDown Live • Arena Anthem</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-300">WWE SmackDown • Arena Anthem</span>
         </div>
-        <button onclick="toggleVideoAudio(event)" id="videoAudioBadge" class="bg-amber-400/20 border border-amber-400/50 text-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full hover:bg-amber-400 hover:text-slate-950 transition">
+        <button onclick="toggleVideoAudio(event)" id="videoAudioBadge" class="bg-amber-400/20 border border-amber-400/50 text-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">
           🔊 Arena Audio Active
         </button>
       </div>
 
-      <div class="relative rounded-2xl overflow-hidden border-2 border-blue-500/40 bg-black shadow-inner">
-        <video id="arenaVideo" src="./smackdown.mp4" class="w-full max-h-80 object-cover" loop playsinline controls></video>
+      <div class="relative rounded-2xl overflow-hidden border-2 border-blue-500/40 bg-black">
+        <video id="arenaVideo" src="./smackdown.mp4" class="w-full max-h-80 object-cover" preload="metadata" loop playsinline controls></video>
       </div>
       <p class="text-center text-xs text-slate-300 mt-2.5">
         From Scotiabank Arena in Toronto to <strong class="text-amber-300">Atharva's 7th Birthday Main Event!</strong> 🏆
       </p>
     </section>
 
-    <!-- 4. ATHARVA'S LEVEL 7 CHAMPION STATS CARD -->
-    <section class="reveal-card bg-gradient-to-br from-slate-900/95 via-indigo-950/80 to-slate-900/95 backdrop-blur-md border-2 border-amber-400/45 rounded-3xl p-5 shadow-xl">
-      <div class="flex items-center justify-between border-b border-slate-700/80 pb-3 mb-4">
+    <!-- 5. ATHARVA'S LEVEL 7 CHAMPION STATS CARD -->
+    <section class="card-surface border-2 border-amber-400/40 rounded-3xl p-5">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
         <div>
           <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-400">PLAYER PROFILE • EDITION 2026</span>
           <h2 class="font-display font-bold text-2xl text-white">⚡ Atharva's Level 7 Stats</h2>
         </div>
-        <div class="bg-amber-400 text-slate-950 font-display font-bold text-sm px-3 py-1 rounded-xl shadow">
+        <div class="bg-amber-400 text-slate-950 font-display font-bold text-sm px-3 py-1 rounded-xl">
           OVR 99
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-3 text-xs">
-        <div class="bg-slate-950/70 border border-slate-800 p-3 rounded-2xl">
+        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
           <div class="text-slate-400 font-bold uppercase text-[10px]">⚽ Favorite Legend</div>
           <div class="font-display font-bold text-base text-pink-400 mt-0.5">Lionel Messi #10</div>
         </div>
-        <div class="bg-slate-950/70 border border-slate-800 p-3 rounded-2xl">
+        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
           <div class="text-slate-400 font-bold uppercase text-[10px]">🏆 Main Event</div>
           <div class="font-display font-bold text-base text-blue-400 mt-0.5">WWE SmackDown</div>
         </div>
-        <div class="bg-slate-950/70 border border-slate-800 p-3 rounded-2xl">
+        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
           <div class="text-slate-400 font-bold uppercase text-[10px]">🎮 Game Skill</div>
           <div class="font-display font-bold text-base text-emerald-400 mt-0.5">Roblox Obby Master</div>
         </div>
-        <div class="bg-slate-950/70 border border-slate-800 p-3 rounded-2xl">
+        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
           <div class="text-slate-400 font-bold uppercase text-[10px]">🎂 Cake Power</div>
           <div class="font-display font-bold text-base text-amber-400 mt-0.5">Level 7 Unlocked!</div>
         </div>
       </div>
     </section>
 
-    <!-- 5. INTERACTIVE 7 BIRTHDAY CANDLES -->
-    <section class="reveal-card bg-slate-900/85 backdrop-blur-md border-2 border-amber-400/40 rounded-3xl p-5 text-center shadow-xl">
+    <!-- 6. INTERACTIVE 7 BIRTHDAY CANDLES -->
+    <section class="card-surface border-2 border-amber-400/40 rounded-3xl p-5 text-center">
       <div class="inline-block bg-amber-400/20 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
         🎂 Make a Birthday Wish
       </div>
@@ -325,92 +352,24 @@
 
       <div class="relative max-w-xs mx-auto pt-8 pb-2">
         <div id="candles-row" class="flex justify-center items-end gap-3 sm:gap-4 px-2 relative z-10"></div>
-        <div class="w-full h-14 bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 rounded-t-2xl border-b-4 border-white/40 shadow-inner flex items-center justify-center">
-          <span class="font-display font-bold text-white text-sm tracking-widest drop-shadow">★ HAPPY 7TH ATHARVA ★</span>
+        <div class="w-full h-14 bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 rounded-t-2xl border-b-4 border-white/40 flex items-center justify-center">
+          <span class="font-display font-bold text-white text-sm tracking-widest">★ HAPPY 7TH ATHARVA ★</span>
         </div>
-        <div class="w-[106%] -ml-[3%] h-4 bg-slate-200 rounded-full shadow-lg"></div>
+        <div class="w-[106%] -ml-[3%] h-4 bg-slate-200 rounded-full"></div>
       </div>
 
       <div class="mt-4 flex justify-center gap-2">
-        <button id="blowAllBtn" onclick="blowAllCandles(event)" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-display font-bold text-sm px-5 py-2.5 rounded-xl shadow-md hover:brightness-110 active:scale-95 transition">
+        <button id="blowAllBtn" onclick="blowAllCandles(event)" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-display font-bold text-sm px-5 py-2.5 rounded-xl active:scale-95 transition">
           🌬️ Blow All 7 Candles!
         </button>
-        <button id="relightBtn" onclick="relightCandles(event)" class="hidden bg-slate-800 border border-slate-600 text-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-slate-700 transition">
+        <button id="relightBtn" onclick="relightCandles(event)" class="hidden bg-slate-800 border border-slate-600 text-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl">
           🔥 Relight Candles
         </button>
       </div>
     </section>
 
-    <!-- 6. PARTY DETAILS & LIVE COUNTDOWN -->
-    <section class="reveal-card bg-gradient-to-br from-blue-950/90 to-slate-900/95 backdrop-blur-md border-2 border-blue-400/40 rounded-3xl p-6 shadow-2xl space-y-5">
-      <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
-        <h2 class="font-display font-bold text-2xl text-white">📍 Party Details</h2>
-        <span class="bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-extrabold px-3 py-1 rounded-full">
-          VIP INVITE
-        </span>
-      </div>
-
-      <div class="grid grid-cols-4 gap-2 text-center bg-slate-950/75 p-3 rounded-2xl border border-slate-800">
-        <div>
-          <div id="cd-days" class="font-display font-bold text-2xl text-amber-400">--</div>
-          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Days</div>
-        </div>
-        <div>
-          <div id="cd-hours" class="font-display font-bold text-2xl text-white">--</div>
-          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Hours</div>
-        </div>
-        <div>
-          <div id="cd-mins" class="font-display font-bold text-2xl text-white">--</div>
-          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Mins</div>
-        </div>
-        <div>
-          <div id="cd-secs" class="font-display font-bold text-2xl text-blue-400">--</div>
-          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Secs</div>
-        </div>
-      </div>
-
-      <div class="space-y-4">
-        <div class="flex items-start gap-3.5">
-          <div class="w-11 h-11 rounded-2xl bg-amber-400/15 border border-amber-400/40 flex items-center justify-center text-xl shrink-0">
-            🗓️
-          </div>
-          <div>
-            <div class="text-xs font-bold uppercase tracking-wider text-amber-400">Date & Kick-Off Time</div>
-            <div class="font-display font-bold text-lg text-white">Saturday, December 12, 2026</div>
-            <div class="text-sm text-slate-300">Starts at <strong class="text-white">1:00 PM EST</strong> • Cake, Games & Feast!</div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3.5">
-          <div class="w-11 h-11 rounded-2xl bg-blue-400/15 border border-blue-400/40 flex items-center justify-center text-xl shrink-0">
-            🏢
-          </div>
-          <div class="flex-1">
-            <div class="text-xs font-bold uppercase tracking-wider text-blue-400">Party Venue</div>
-            <div class="font-display font-bold text-lg text-white leading-snug">741 Sheppard Avenue West</div>
-            <div class="text-sm text-slate-300">North York, ON, M3H 0C9</div>
-            <div class="mt-2 inline-flex items-center gap-2 bg-amber-400 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-lg shadow">
-              <span>🔔 INTERCOM BUZZ: 3020</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
-        <a href="https://www.google.com/maps/search/?api=1&query=741+Sheppard+Avenue+West+North+York+ON+M3H+0C9" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition">
-          <span>🗺️ Google Maps</span>
-        </a>
-        <button onclick="copyAddress(event)" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 transition">
-          <span>📋 Copy Address</span>
-        </button>
-        <button onclick="downloadICS(event)" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow transition">
-          <span>📅 Add Calendar</span>
-        </button>
-      </div>
-    </section>
-
     <!-- 7. DUPLICATE-SAFE RSVP & HOLOGRAPHIC VIP PASS -->
-    <section id="rsvp-section" class="reveal-card bg-slate-900/90 backdrop-blur-md border-2 border-amber-400/50 rounded-3xl p-6 shadow-2xl">
+    <section id="rsvp-section" class="card-surface border-2 border-amber-400/55 rounded-3xl p-6">
       <div class="text-center mb-5">
         <span class="bg-amber-400/20 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
           🎟️ Claim Your VIP Pass
@@ -450,7 +409,7 @@
           <input type="text" id="birthdayWish" placeholder="Happy 7th Birthday Champ! ⚽🎂" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-4 py-3 text-sm text-white outline-none transition" />
         </div>
 
-        <button type="submit" id="rsvpSubmitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-bold text-lg shadow-xl hover:brightness-110 active:scale-95 transition">
+        <button type="submit" id="rsvpSubmitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-bold text-lg shadow-xl active:scale-95 transition">
           🚀 Send RSVP & Unlock VIP Ticket
         </button>
       </form>
@@ -460,7 +419,7 @@
           ✅ RSVP Sent to Ashish & Shweta! Your spot is locked in.
         </div>
 
-        <div class="holo-ticket rounded-3xl p-5 shadow-2xl relative overflow-hidden">
+        <div class="holo-ticket rounded-3xl p-5 relative overflow-hidden">
           <div class="flex justify-between items-start border-b border-amber-400/30 pb-3 mb-3">
             <div>
               <div class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300">OFFICIAL VIP ENTRY PASS</div>
@@ -507,20 +466,17 @@
     </section>
 
     <!-- 8. 1-TAP WORLD CUP PENALTY KICK MINI-GAME -->
-    <section class="reveal-card bg-gradient-to-b from-emerald-950/85 to-slate-900/95 backdrop-blur-md border-2 border-emerald-400/40 rounded-3xl p-5 text-center shadow-xl">
+    <section class="card-surface border-2 border-emerald-400/40 rounded-3xl p-5 text-center">
       <span class="bg-emerald-400/20 text-emerald-300 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
         ⚽ Kids' Fun Zone
       </span>
       <h2 class="font-display font-bold text-2xl text-white mt-2">Score a Birthday Goal for Atharva!</h2>
       <p id="goal-status" class="text-xs text-slate-300 mt-1 mb-4">Pick a corner to shoot past the keeper!</p>
 
-      <div class="relative bg-emerald-900/50 border-2 border-white/40 rounded-2xl h-36 max-w-xs mx-auto overflow-hidden flex flex-col justify-between p-3">
-        <!-- Goal Net Top -->
+      <div class="relative bg-emerald-950 border-2 border-white/40 rounded-2xl h-36 max-w-xs mx-auto overflow-hidden flex flex-col justify-between p-3">
         <div class="w-4/5 mx-auto h-12 border-x-4 border-t-4 border-white/80 rounded-t-lg relative flex items-center justify-center bg-white/5">
           <span id="goalie" class="text-2xl select-none">🧤</span>
         </div>
-
-        <!-- Soccer Ball -->
         <div class="flex justify-center pb-1">
           <span id="soccer-ball" class="text-3xl select-none">⚽</span>
         </div>
@@ -543,14 +499,14 @@
   </main>
 
   <!-- FULL-SCREEN PHOTO LIGHTBOX -->
-  <div id="lightboxModal" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-lg flex flex-col items-center justify-center p-4">
-    <img id="lightbox-img" src="" class="max-h-[80vh] max-w-full rounded-2xl border-2 border-amber-400 shadow-2xl object-contain" />
+  <div id="lightboxModal" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/95 flex flex-col items-center justify-center p-4">
+    <img id="lightbox-img" src="" class="max-h-[80vh] max-w-full rounded-2xl border-2 border-amber-400 object-contain" />
     <p id="lightbox-caption" class="font-display font-bold text-lg text-amber-300 mt-3 text-center"></p>
     <span class="text-xs text-slate-400 mt-1">Tap anywhere to close</span>
   </div>
 
   <!-- HOST RSVP DASHBOARD MODAL -->
-  <div id="hostModal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+  <div id="hostModal" class="fixed inset-0 z-50 hidden bg-slate-950/95 flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 space-y-4">
       <div class="flex justify-between items-center">
         <h3 class="font-display font-bold text-xl text-white">📋 Saved RSVPs (Local)</h3>
@@ -636,9 +592,9 @@
       if (['INPUT', 'SELECT', 'BUTTON', 'A', 'VIDEO'].includes(e.target.tagName)) return;
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 16,
-          spread: 55,
-          startVelocity: 22,
+          particleCount: 14,
+          spread: 50,
+          startVelocity: 20,
           scalar: 0.75,
           origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
         });
@@ -650,20 +606,12 @@
       if (e) e.stopPropagation();
       playFanfare();
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 70, angle: 60, spread: 65, origin: { x: 0.1, y: 0.7 } });
-        confetti({ particleCount: 70, angle: 120, spread: 65, origin: { x: 0.9, y: 0.7 } });
+        confetti({ particleCount: 60, angle: 60, spread: 60, origin: { x: 0.1, y: 0.7 } });
+        confetti({ particleCount: 60, angle: 120, spread: 60, origin: { x: 0.9, y: 0.7 } });
       }
     }
 
-    /* --- 3D ENVELOPE COVER --- */
-    const tiltCard = document.getElementById('tilt-envelope');
-    document.addEventListener('mousemove', (e) => {
-      if (document.getElementById('envelope-overlay').classList.contains('opened')) return;
-      const xAxis = (window.innerWidth / 2 - e.pageX) / 26;
-      const yAxis = (window.innerHeight / 2 - e.pageY) / 26;
-      tiltCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
-
+    /* --- ENVELOPE COVER --- */
     function openInvitation(e, mutedMode = false) {
       if (e) e.stopPropagation();
       const overlay = document.getElementById('envelope-overlay');
@@ -682,20 +630,12 @@
           arenaVideo.play().catch(() => {});
         }
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 110, spread: 80, origin: { y: 0.6 } });
+          confetti({ particleCount: 90, spread: 75, origin: { y: 0.6 } });
         }
       }
       updateSoundUI();
-      setTimeout(() => { overlay.style.display = 'none'; }, 850);
+      setTimeout(() => { overlay.style.display = 'none'; }, 650);
     }
-
-    /* --- SCROLL REVEAL ANIMATION --- */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal-card').forEach(el => observer.observe(el));
 
     /* --- CHAMPION PHOTO CAROUSEL & TOUCH SWIPE --- */
     const slides = [
@@ -733,12 +673,12 @@
     function updateGallery() {
       const s = slides[currentSlide];
       const img = document.getElementById('gallery-main-img');
-      img.style.opacity = '0.25';
+      img.style.opacity = '0.35';
       setTimeout(() => {
         img.src = s.src;
-        img.className = `w-full h-full object-cover ${s.pos} transition-all duration-500 cursor-zoom-in`;
+        img.className = `w-full h-full object-cover ${s.pos} transition-opacity duration-300 cursor-zoom-in`;
         img.style.opacity = '1';
-      }, 150);
+      }, 120);
 
       const badge = document.getElementById('gallery-badge');
       badge.textContent = s.badge;
@@ -748,10 +688,10 @@
 
       document.querySelectorAll('.thumb-btn').forEach((btn, idx) => {
         if (idx === currentSlide) {
-          btn.classList.add('border-amber-400', 'ring-2', 'ring-amber-400/40');
+          btn.classList.add('border-amber-400');
           btn.classList.remove('border-transparent', 'opacity-65');
         } else {
-          btn.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400/40');
+          btn.classList.remove('border-amber-400');
           btn.classList.add('border-transparent', 'opacity-65');
         }
       });
@@ -771,7 +711,6 @@
       playTone(620, 'sine', 0.12);
     }
 
-    // Touch Swipe Gestures for Gallery
     let touchStartX = 0;
     const touchZone = document.getElementById('gallery-touch-zone');
     touchZone.addEventListener('touchstart', (e) => {
@@ -789,7 +728,7 @@
         currentSlide = (currentSlide + 1) % slides.length;
         updateGallery();
       }
-    }, 5000);
+    }, 5500);
 
     function openLightbox() {
       clearInterval(galleryTimer);
@@ -814,13 +753,13 @@
       blownCount = 0;
       for (let i = 0; i < totalCandles; i++) {
         const candle = document.createElement('div');
-        candle.className = 'flex flex-col items-center cursor-pointer group relative';
+        candle.className = 'flex flex-col items-center cursor-pointer relative';
         candle.onclick = (e) => { e.stopPropagation(); blowCandle(i); };
         candle.innerHTML = `
           <div id="smoke-${i}" class="w-3 h-3 rounded-full bg-slate-300/70 opacity-0 absolute -top-6 pointer-events-none"></div>
-          <div id="flame-${i}" class="flame w-3.5 h-5 mb-0.5 transition-all"></div>
+          <div id="flame-${i}" class="flame w-3.5 h-5 mb-0.5"></div>
           <div class="w-0.5 h-1.5 bg-slate-800"></div>
-          <div class="w-3 h-10 ${candleColors[i]} rounded-t-sm border-x border-white/30 shadow"></div>
+          <div class="w-3 h-10 ${candleColors[i]} rounded-t-sm border-x border-white/30"></div>
         `;
         row.appendChild(candle);
       }
@@ -843,7 +782,7 @@
         document.getElementById('relightBtn').classList.remove('hidden');
         playFanfare();
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 140, spread: 95, origin: { y: 0.65 } });
+          confetti({ particleCount: 110, spread: 90, origin: { y: 0.65 } });
         }
       }
     }
@@ -851,7 +790,7 @@
     function blowAllCandles(e) {
       if (e) e.stopPropagation();
       for (let i = 0; i < totalCandles; i++) {
-        setTimeout(() => blowCandle(i), i * 85);
+        setTimeout(() => blowCandle(i), i * 80);
       }
     }
 
@@ -890,7 +829,7 @@
           status.innerHTML = '<strong class="text-amber-300">⚽ GOOOAAAL! Messi-style finish for Atharva!</strong>';
           playFanfare();
           if (typeof confetti === 'function') {
-            confetti({ particleCount: 55, spread: 60, origin: { y: 0.75 } });
+            confetti({ particleCount: 45, spread: 55, origin: { y: 0.75 } });
           }
         } else {
           status.innerHTML = '<span class="text-rose-300">🧤 Saved by the keeper! Try another corner!</span>';
@@ -901,8 +840,8 @@
           ball.style.transform = 'translate(0, 0) scale(1)';
           goalie.style.transform = 'translateX(0)';
           isShooting = false;
-        }, 900);
-      }, 450);
+        }, 850);
+      }, 420);
     }
 
     /* --- COUNTDOWN TIMER --- */
@@ -977,7 +916,6 @@
       document.getElementById('vip-pass-container').classList.remove('hidden');
     }
 
-    // Check if guest already RSVPed on this device
     window.addEventListener('DOMContentLoaded', () => {
       const savedMine = JSON.parse(localStorage.getItem('atharva7_my_rsvp') || 'null');
       if (savedMine) {
@@ -1002,7 +940,6 @@
         const existingList = JSON.parse(localStorage.getItem('atharva7_rsvps') || '[]');
         const prevMine = JSON.parse(localStorage.getItem('atharva7_my_rsvp') || 'null');
 
-        // Duplicate prevention: match either previous device RSVP or exact same name (case-insensitive)
         const matchIdx = existingList.findIndex(item =>
           (prevMine && item.name.toLowerCase() === prevMine.name.toLowerCase()) ||
           item.name.toLowerCase() === name.toLowerCase()
@@ -1025,9 +962,9 @@
 
         playFanfare();
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 110, spread: 85, origin: { y: 0.6 } });
+          confetti({ particleCount: 95, spread: 80, origin: { y: 0.6 } });
         }
-      }, 650);
+      }, 600);
     }
 
     function editExistingRSVP(e) {
