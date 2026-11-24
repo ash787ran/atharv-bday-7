@@ -3,33 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Atharva Turns 7! | VIP 3D Birthday Invitation</title>
-  <meta property="og:title" content="You're Invited to Atharva's 7th Birthday Party! 🎉" />
+  <title>Atharva Turns 7! | 3D VIP Birthday Invitation</title>
+  <meta property="og:title" content="You're Invited to Atharva's 7 th Birthday Party! 🎉" />
   <meta property="og:description" content="Saturday, Dec 12, 2026 at 1:00 PM • 741 Sheppard Ave W, North York (Buzz 3020). Tap to open your VIP pass!" />
   <meta property="og:image" content="https://atharv-bday-7.vercel.app/atharvawithmessidress.jpg" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Outfit', sans-serif;
-      background: linear-gradient(180deg, #17153b 0%, #090d1e 45%, #020617 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 48%, #020617 100%);
       color: #f8fafc;
       overflow-x: hidden;
       min-height: 100vh;
     }
 
     h1, h2, h3, .font-display {
-      font-family: 'Fredoka', sans-serif;
+      font-family: 'Baloo 2', cursive;
+      letter-spacing: -0.01em;
     }
 
-    /* Lightweight GPU-friendly Floating Icons */
-    @keyframes floatDrift {
-      0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
-      50% { transform: translate3d(0, -16px, 0) rotate(5deg); }
+    /* Big, Gentle Floating Birthday Balloons */
+    @keyframes balloonFloat {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-5deg); }
+      50% { transform: translate3d(0, -28px, 0) rotate(6deg); }
     }
-    .float-1 { animation: floatDrift 4.5s ease-in-out infinite; will-change: transform; }
-    .float-2 { animation: floatDrift 5.5s ease-in-out infinite 0.8s; will-change: transform; }
+    @keyframes balloonFloatAlt {
+      0%, 100% { transform: translate3d(0, -10px, 0) rotate(4deg); }
+      50% { transform: translate3d(0, 18px, 0) rotate(-6deg); }
+    }
+    .balloon-1 { animation: balloonFloat 6s ease-in-out infinite; will-change: transform; }
+    .balloon-2 { animation: balloonFloatAlt 7.2s ease-in-out infinite; will-change: transform; }
+    .balloon-3 { animation: balloonFloat 8s ease-in-out infinite 1.2s; will-change: transform; }
 
     /* Shimmering Gold Foil Text */
     .shimmer-gold {
@@ -37,13 +43,13 @@
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shimmerMove 3s linear infinite;
+      animation: shimmerMove 3.2s linear infinite;
     }
     @keyframes shimmerMove {
       to { background-position: 200% center; }
     }
 
-    /* 3D Envelope Cover (No heavy backdrop-filter) */
+    /* Envelope Cover */
     .perspective-1200 { perspective: 1200px; }
     #envelope-overlay {
       transition: opacity 0.65s ease-out, transform 0.65s ease-out;
@@ -60,7 +66,7 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
     }
 
-    /* Crisp Solid-Gradient Cards (Zero Scroll Lag) */
+    /* Smooth Card Surfaces */
     .card-surface {
       background: linear-gradient(160deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.98) 100%);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
@@ -106,21 +112,24 @@
 </head>
 <body class="antialiased selection:bg-amber-400 selection:text-slate-950" onclick="spawnClickSparkle(event)">
 
-  <!-- LIGHTWEIGHT FLOATING PARTY ICONS -->
+  <!-- LARGE FLOATING BIRTHDAY BALLOONS BACKGROUND -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute top-14 left-5 text-3xl opacity-30 float-1">⚽</div>
-    <div class="absolute top-24 right-7 text-3xl opacity-35 float-2">🎈</div>
-    <div class="absolute top-[45%] left-4 text-3xl opacity-25 float-1">🏆</div>
-    <div class="absolute bottom-24 right-6 text-3xl opacity-30 float-2">🎉</div>
+    <div class="absolute top-12 left-3 text-5xl sm:text-6xl opacity-45 balloon-1">🎈</div>
+    <div class="absolute top-16 right-4 text-6xl sm:text-7xl opacity-50 balloon-2">🎈</div>
+    <div class="absolute top-[28%] left-2 text-4xl sm:text-5xl opacity-35 balloon-3">🎉</div>
+    <div class="absolute top-[36%] right-3 text-5xl sm:text-6xl opacity-40 balloon-1">🎈</div>
+    <div class="absolute top-[58%] left-4 text-5xl sm:text-6xl opacity-35 balloon-2">🎈</div>
+    <div class="absolute bottom-24 right-4 text-5xl sm:text-6xl opacity-40 balloon-3">🎈</div>
+    <div class="absolute bottom-14 left-5 text-4xl sm:text-5xl opacity-35 balloon-1">🎂</div>
   </div>
 
-  <!-- FLOATING MUSIC & FIREWORKS BAR -->
+  <!-- FLOATING SOUND & FIREWORKS BAR -->
   <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
-    <button onclick="launchFireworks(event)" class="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-full text-xs font-extrabold shadow-lg active:scale-95 transition">
+    <button onclick="launchFireworks(event)" class="bg-amber-400 text-slate-950 px-3.5 py-1.5 rounded-full text-xs font-extrabold shadow-lg active:scale-95 transition">
       🎆 Fireworks!
     </button>
     <button id="soundToggle" onclick="toggleSound(event)" class="bg-slate-900 border border-amber-400/50 text-amber-300 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg transition">
-      <span id="soundIcon">🔊</span> <span id="soundLabel">Music ON</span>
+      <span id="soundIcon">🔊</span> <span id="soundLabel">Sound ON</span>
     </button>
   </div>
 
@@ -129,31 +138,31 @@
     <div class="max-w-md w-full perspective-1200">
       <div class="envelope-box rounded-3xl p-7 text-center relative overflow-hidden">
         <div class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/50 text-amber-300 px-4 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase mb-5">
-          <span>🎟️ VIP ALL-ACCESS PASS</span>
+          <span>🎈 7 TH BIRTHDAY INVITATION 🎈</span>
         </div>
 
         <div class="relative w-32 h-32 mx-auto mb-5">
           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-blue-500"></div>
           <img src="./IMG_8437 2.jpg" alt="Atharva" class="relative w-full h-full object-cover object-right rounded-full p-1 bg-slate-950" />
-          <div class="absolute -bottom-1 -right-1 bg-amber-400 text-slate-950 font-display font-bold text-base w-10 h-10 rounded-full flex items-center justify-center border-2 border-slate-950 shadow-lg">
+          <div class="absolute -bottom-1 -right-1 bg-amber-400 text-slate-950 font-display font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center border-2 border-slate-950 shadow-lg">
             7!
           </div>
         </div>
 
-        <h1 class="text-4xl font-display font-bold leading-tight mb-2">
+        <h1 class="text-4xl sm:text-5xl font-display font-extrabold leading-tight mb-2">
           <span class="shimmer-gold">ATHARVA'S</span><br/>
-          <span class="text-white">7TH BIRTHDAY!</span>
+          <span class="text-white">7 TH BIRTHDAY!</span>
         </h1>
-        <p class="text-blue-200 text-sm mb-6">
+        <p class="text-blue-200 text-sm font-medium mb-6">
           Saturday, Dec 12, 2026 • 1:00 PM
         </p>
 
-        <button onclick="openInvitation(event)" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-bold text-lg tracking-wide shadow-xl active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+        <button onclick="openInvitation(event)" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-extrabold text-xl tracking-wide shadow-xl active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
           <span>🎁 TAP TO OPEN INVITE</span>
         </button>
 
         <button onclick="openInvitation(event, true)" class="mt-4 text-xs text-slate-400 hover:text-white underline">
-          Skip animation (Muted)
+          Skip animation
         </button>
       </div>
     </div>
@@ -165,23 +174,23 @@
     <!-- 1. HERO TITLE BANNER -->
     <section class="text-center space-y-2.5">
       <div class="inline-flex items-center gap-2 bg-blue-600/30 border border-blue-400/40 px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider uppercase text-amber-300">
-        <span>⭐ LEVEL 7 UNLOCKED • DEC 12, 2026 ⭐</span>
+        <span>🎈 CELEBRATING 7 AMAZING YEARS • DEC 12 🎈</span>
       </div>
 
-      <h1 class="text-4xl sm:text-5xl font-display font-bold tracking-tight leading-none">
+      <h1 class="text-4xl sm:text-5xl font-display font-extrabold tracking-tight leading-none">
         YOU'RE INVITED TO<br/>
-        <span class="shimmer-gold">ATHARVA'S 7TH!</span>
+        <span class="shimmer-gold">ATHARVA'S 7 TH!</span>
       </h1>
 
-      <p class="text-slate-300 text-sm max-w-sm mx-auto">
-        Join <strong class="text-white">Ashish, Shweta & Atharva</strong> for an afternoon of games, music, cake & celebration!
+      <p class="text-slate-200 text-sm sm:text-base max-w-sm mx-auto leading-relaxed">
+        Join <strong class="text-white">Ashish, Shweta & Atharva</strong> for a joyful afternoon of games, music, cake & celebration!
       </p>
     </section>
 
-    <!-- 2. PARTY DETAILS, CALENDAR & COUNTDOWN (RIGHT AT THE TOP!) -->
+    <!-- 2. PARTY DETAILS, CALENDAR & COUNTDOWN (AT THE TOP) -->
     <section class="card-details border-2 border-blue-400/50 rounded-3xl p-5 space-y-4">
       <div class="flex items-center justify-between border-b border-slate-700/80 pb-2.5">
-        <h2 class="font-display font-bold text-xl text-white">📍 When & Where</h2>
+        <h2 class="font-display font-bold text-2xl text-white">📍 When & Where</h2>
         <a href="#rsvp-section" class="bg-amber-400 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full shadow hover:brightness-110 transition">
           🎟️ Jump to RSVP ↓
         </a>
@@ -194,7 +203,7 @@
           </div>
           <div>
             <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Date & Kick-Off Time</div>
-            <div class="font-display font-bold text-lg text-white leading-tight">Saturday, December 12, 2026</div>
+            <div class="font-display font-bold text-xl text-white leading-tight">Saturday, December 12, 2026</div>
             <div class="text-xs text-slate-300 mt-0.5">Starts at <strong class="text-white">1:00 PM EST</strong> • Cake, Games & Feast!</div>
           </div>
         </div>
@@ -205,7 +214,7 @@
           </div>
           <div class="flex-1">
             <div class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Party Venue</div>
-            <div class="font-display font-bold text-lg text-white leading-tight">741 Sheppard Avenue West</div>
+            <div class="font-display font-bold text-xl text-white leading-tight">741 Sheppard Avenue West</div>
             <div class="text-xs text-slate-300">North York, ON, M3H 0C9</div>
             <div class="mt-1.5 inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-extrabold text-xs px-2.5 py-0.5 rounded-md">
               <span>🔔 INTERCOM BUZZ: 3020</span>
@@ -230,19 +239,19 @@
       <!-- Compact Countdown Strip -->
       <div class="grid grid-cols-4 gap-2 text-center bg-slate-950/80 p-2.5 rounded-2xl border border-slate-800">
         <div>
-          <div id="cd-days" class="font-display font-bold text-xl text-amber-400">--</div>
+          <div id="cd-days" class="font-display font-bold text-2xl text-amber-400">--</div>
           <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Days</div>
         </div>
         <div>
-          <div id="cd-hours" class="font-display font-bold text-xl text-white">--</div>
+          <div id="cd-hours" class="font-display font-bold text-2xl text-white">--</div>
           <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Hours</div>
         </div>
         <div>
-          <div id="cd-mins" class="font-display font-bold text-xl text-white">--</div>
+          <div id="cd-mins" class="font-display font-bold text-2xl text-white">--</div>
           <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Mins</div>
         </div>
         <div>
-          <div id="cd-secs" class="font-display font-bold text-xl text-blue-400">--</div>
+          <div id="cd-secs" class="font-display font-bold text-2xl text-blue-400">--</div>
           <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Secs</div>
         </div>
       </div>
@@ -252,7 +261,7 @@
     <section class="card-surface border-2 border-amber-400/45 rounded-3xl p-4">
       <div class="flex items-center justify-between px-1 mb-3">
         <span class="text-xs font-extrabold uppercase tracking-wider text-amber-300">
-          📸 Atharva's Champion Gallery
+          📸 Atharva's Birthday Memories
         </span>
         <span id="gallery-counter" class="text-xs font-bold text-slate-400 bg-slate-950 px-2.5 py-0.5 rounded-full border border-slate-800">1 / 4</span>
       </div>
@@ -269,7 +278,7 @@
 
         <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent p-4">
           <span id="gallery-badge" class="bg-pink-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase tracking-wider">⚽ World Cup Final Vibes</span>
-          <h3 id="gallery-title" class="font-display font-bold text-xl text-white mt-1">Messi #10 Ready for Kick-Off!</h3>
+          <h3 id="gallery-title" class="font-display font-bold text-2xl text-white mt-1">Messi #10 Ready for Kick-Off!</h3>
           <p class="text-xs text-slate-300">Swipe left/right or tap photo to expand</p>
         </div>
       </div>
@@ -290,76 +299,24 @@
       </div>
     </section>
 
-    <!-- 4. WWE SMACKDOWN TORONTO ARENA JUMBOTRON VIDEO & MUSIC ANTHEM -->
-    <section class="card-details border-2 border-blue-400/50 rounded-3xl p-4">
-      <div class="flex items-center justify-between mb-3 px-1">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-300">WWE SmackDown • Arena Anthem</span>
-        </div>
-        <button onclick="toggleVideoAudio(event)" id="videoAudioBadge" class="bg-amber-400/20 border border-amber-400/50 text-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">
-          🔊 Arena Audio Active
-        </button>
-      </div>
-
-      <div class="relative rounded-2xl overflow-hidden border-2 border-blue-500/40 bg-black">
-        <video id="arenaVideo" src="./smackdown.mp4" class="w-full max-h-80 object-cover" preload="metadata" loop playsinline controls></video>
-      </div>
-      <p class="text-center text-xs text-slate-300 mt-2.5">
-        From Scotiabank Arena in Toronto to <strong class="text-amber-300">Atharva's 7th Birthday Main Event!</strong> 🏆
-      </p>
-    </section>
-
-    <!-- 5. ATHARVA'S LEVEL 7 CHAMPION STATS CARD -->
-    <section class="card-surface border-2 border-amber-400/40 rounded-3xl p-5">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-        <div>
-          <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-400">PLAYER PROFILE • EDITION 2026</span>
-          <h2 class="font-display font-bold text-2xl text-white">⚡ Atharva's Level 7 Stats</h2>
-        </div>
-        <div class="bg-amber-400 text-slate-950 font-display font-bold text-sm px-3 py-1 rounded-xl">
-          OVR 99
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3 text-xs">
-        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
-          <div class="text-slate-400 font-bold uppercase text-[10px]">⚽ Favorite Legend</div>
-          <div class="font-display font-bold text-base text-pink-400 mt-0.5">Lionel Messi #10</div>
-        </div>
-        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
-          <div class="text-slate-400 font-bold uppercase text-[10px]">🏆 Main Event</div>
-          <div class="font-display font-bold text-base text-blue-400 mt-0.5">WWE SmackDown</div>
-        </div>
-        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
-          <div class="text-slate-400 font-bold uppercase text-[10px]">🎮 Game Skill</div>
-          <div class="font-display font-bold text-base text-emerald-400 mt-0.5">Roblox Obby Master</div>
-        </div>
-        <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl">
-          <div class="text-slate-400 font-bold uppercase text-[10px]">🎂 Cake Power</div>
-          <div class="font-display font-bold text-base text-amber-400 mt-0.5">Level 7 Unlocked!</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. INTERACTIVE 7 BIRTHDAY CANDLES -->
+    <!-- 4. INTERACTIVE 7 BIRTHDAY CANDLES -->
     <section class="card-surface border-2 border-amber-400/40 rounded-3xl p-5 text-center">
       <div class="inline-block bg-amber-400/20 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
         🎂 Make a Birthday Wish
       </div>
-      <h2 class="font-display font-bold text-2xl text-white">Blow Out All 7 Candles!</h2>
+      <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Blow Out All 7 Candles!</h2>
       <p id="candle-status" class="text-xs text-slate-300 mt-1 mb-4">Tap each candle flame (or hit the button below) for Atharva!</p>
 
       <div class="relative max-w-xs mx-auto pt-8 pb-2">
         <div id="candles-row" class="flex justify-center items-end gap-3 sm:gap-4 px-2 relative z-10"></div>
         <div class="w-full h-14 bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 rounded-t-2xl border-b-4 border-white/40 flex items-center justify-center">
-          <span class="font-display font-bold text-white text-sm tracking-widest">★ HAPPY 7TH ATHARVA ★</span>
+          <span class="font-display font-bold text-white text-base tracking-wide">★ HAPPY 7 TH ATHARVA ★</span>
         </div>
         <div class="w-[106%] -ml-[3%] h-4 bg-slate-200 rounded-full"></div>
       </div>
 
       <div class="mt-4 flex justify-center gap-2">
-        <button id="blowAllBtn" onclick="blowAllCandles(event)" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-display font-bold text-sm px-5 py-2.5 rounded-xl active:scale-95 transition">
+        <button id="blowAllBtn" onclick="blowAllCandles(event)" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-display font-bold text-base px-5 py-2.5 rounded-xl active:scale-95 transition">
           🌬️ Blow All 7 Candles!
         </button>
         <button id="relightBtn" onclick="relightCandles(event)" class="hidden bg-slate-800 border border-slate-600 text-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl">
@@ -368,7 +325,7 @@
       </div>
     </section>
 
-    <!-- 7. DUPLICATE-SAFE RSVP & HOLOGRAPHIC VIP PASS -->
+    <!-- 5. DUPLICATE-SAFE RSVP & HOLOGRAPHIC VIP PASS -->
     <section id="rsvp-section" class="card-surface border-2 border-amber-400/55 rounded-3xl p-6">
       <div class="text-center mb-5">
         <span class="bg-amber-400/20 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -406,10 +363,10 @@
 
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Birthday Wish for Atharva (Optional)</label>
-          <input type="text" id="birthdayWish" placeholder="Happy 7th Birthday Champ! ⚽🎂" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-4 py-3 text-sm text-white outline-none transition" />
+          <input type="text" id="birthdayWish" placeholder="Happy 7 th Birthday Champ! 🎈🎂" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-4 py-3 text-sm text-white outline-none transition" />
         </div>
 
-        <button type="submit" id="rsvpSubmitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-bold text-lg shadow-xl active:scale-95 transition">
+        <button type="submit" id="rsvpSubmitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-extrabold text-xl shadow-xl active:scale-95 transition">
           🚀 Send RSVP & Unlock VIP Ticket
         </button>
       </form>
@@ -423,7 +380,7 @@
           <div class="flex justify-between items-start border-b border-amber-400/30 pb-3 mb-3">
             <div>
               <div class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300">OFFICIAL VIP ENTRY PASS</div>
-              <h3 class="font-display font-bold text-2xl text-white">ATHARVA TURNS 7!</h3>
+              <h3 class="font-display font-extrabold text-2xl text-white">ATHARVA TURNS 7!</h3>
             </div>
             <div class="bg-amber-400 text-slate-950 font-display font-bold text-xs px-3 py-1 rounded-full">
               REGISTERED ✓
@@ -465,7 +422,7 @@
       </div>
     </section>
 
-    <!-- 8. 1-TAP WORLD CUP PENALTY KICK MINI-GAME -->
+    <!-- 6. 1-TAP WORLD CUP PENALTY KICK MINI-GAME -->
     <section class="card-surface border-2 border-emerald-400/40 rounded-3xl p-5 text-center">
       <span class="bg-emerald-400/20 text-emerald-300 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
         ⚽ Kids' Fun Zone
@@ -491,7 +448,7 @@
     </section>
 
     <footer class="text-center text-xs text-slate-500 pt-2 pb-8 space-y-2">
-      <p>Hosted with ❤️ by Ashish & Shweta for Atharva's 7th Birthday</p>
+      <p>Hosted with ❤️ by Ashish & Shweta for Atharva's 7 th Birthday</p>
       <button onclick="openHostModal(event)" class="text-slate-600 hover:text-slate-400 underline text-[11px]">
         Host RSVP Log
       </button>
@@ -501,7 +458,7 @@
   <!-- FULL-SCREEN PHOTO LIGHTBOX -->
   <div id="lightboxModal" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/95 flex flex-col items-center justify-center p-4">
     <img id="lightbox-img" src="" class="max-h-[80vh] max-w-full rounded-2xl border-2 border-amber-400 object-contain" />
-    <p id="lightbox-caption" class="font-display font-bold text-lg text-amber-300 mt-3 text-center"></p>
+    <p id="lightbox-caption" class="font-display font-bold text-xl text-amber-300 mt-3 text-center"></p>
     <span class="text-xs text-slate-400 mt-1">Tap anywhere to close</span>
   </div>
 
@@ -526,10 +483,9 @@
   </div>
 
   <script>
-    /* --- AUDIO & SMACKDOWN ANTHEM SYNC --- */
+    /* --- WEB AUDIO CHIMES --- */
     let soundEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const arenaVideo = document.getElementById('arenaVideo');
 
     function playTone(freq, type = 'sine', duration = 0.22, delay = 0) {
       if (!soundEnabled) return;
@@ -555,46 +511,44 @@
       playTone(1046.50, 'triangle', 0.5, 0.33);
     }
 
-    function updateSoundUI() {
-      document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
-      document.getElementById('soundLabel').textContent = soundEnabled ? 'Music ON' : 'Muted';
-      const badge = document.getElementById('videoAudioBadge');
-      if (badge) {
-        badge.textContent = soundEnabled ? '🔊 Arena Audio Active' : '🔇 Tap for Arena Audio';
-      }
-    }
-
     function toggleSound(e) {
       if (e) e.stopPropagation();
       soundEnabled = !soundEnabled;
-      if (arenaVideo) {
-        arenaVideo.muted = !soundEnabled;
-        if (soundEnabled && arenaVideo.paused) {
-          arenaVideo.play().catch(() => {});
-        }
-      }
-      updateSoundUI();
+      document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+      document.getElementById('soundLabel').textContent = soundEnabled ? 'Sound ON' : 'Muted';
     }
 
-    function toggleVideoAudio(e) {
-      if (e) e.stopPropagation();
-      soundEnabled = true;
-      if (arenaVideo) {
-        arenaVideo.muted = false;
-        arenaVideo.play().catch(() => {});
-      }
-      updateSoundUI();
-      showToast('🔊 Playing WWE SmackDown Arena Music!');
+    /* --- SLOW CONTINUOUS FIREWORKS & TAP SPARKLES --- */
+    let slowFireworksStarted = false;
+    function startSlowFireworksLoop() {
+      if (slowFireworksStarted || typeof confetti !== 'function') return;
+      slowFireworksStarted = true;
+
+      let sideToggle = true;
+      setInterval(() => {
+        if (document.hidden) return;
+        confetti({
+          particleCount: 22,
+          angle: sideToggle ? 65 : 115,
+          spread: 55,
+          startVelocity: 24,
+          gravity: 0.65,
+          ticks: 240,
+          scalar: 0.85,
+          origin: { x: sideToggle ? 0.12 : 0.88, y: 0.72 }
+        });
+        sideToggle = !sideToggle;
+      }, 3600);
     }
 
-    /* --- TAP-ANYWHERE SPARKLES & FIREWORKS --- */
     function spawnClickSparkle(e) {
-      if (['INPUT', 'SELECT', 'BUTTON', 'A', 'VIDEO'].includes(e.target.tagName)) return;
+      if (['INPUT', 'SELECT', 'BUTTON', 'A'].includes(e.target.tagName)) return;
       if (typeof confetti === 'function') {
         confetti({
           particleCount: 14,
           spread: 50,
-          startVelocity: 20,
+          startVelocity: 18,
+          gravity: 0.7,
           scalar: 0.75,
           origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
         });
@@ -606,8 +560,8 @@
       if (e) e.stopPropagation();
       playFanfare();
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 60, angle: 60, spread: 60, origin: { x: 0.1, y: 0.7 } });
-        confetti({ particleCount: 60, angle: 120, spread: 60, origin: { x: 0.9, y: 0.7 } });
+        confetti({ particleCount: 55, angle: 60, spread: 60, gravity: 0.7, origin: { x: 0.15, y: 0.7 } });
+        confetti({ particleCount: 55, angle: 120, spread: 60, gravity: 0.7, origin: { x: 0.85, y: 0.7 } });
       }
     }
 
@@ -619,21 +573,15 @@
 
       if (mutedMode) {
         soundEnabled = false;
-        if (arenaVideo) {
-          arenaVideo.muted = true;
-          arenaVideo.play().catch(() => {});
-        }
+        document.getElementById('soundIcon').textContent = '🔇';
+        document.getElementById('soundLabel').textContent = 'Muted';
       } else {
-        soundEnabled = true;
-        if (arenaVideo) {
-          arenaVideo.muted = false;
-          arenaVideo.play().catch(() => {});
-        }
+        playFanfare();
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 90, spread: 75, origin: { y: 0.6 } });
+          confetti({ particleCount: 85, spread: 75, gravity: 0.75, origin: { y: 0.6 } });
         }
       }
-      updateSoundUI();
+      startSlowFireworksLoop();
       setTimeout(() => { overlay.style.display = 'none'; }, 650);
     }
 
@@ -777,12 +725,12 @@
       blownCount++;
 
       if (blownCount === totalCandles) {
-        document.getElementById('candle-status').innerHTML = '<strong class="text-amber-400">🎉 WISH GRANTED! Happy 7th Birthday Atharva! 🎉</strong>';
+        document.getElementById('candle-status').innerHTML = '<strong class="text-amber-400">🎉 WISH GRANTED! Happy 7 th Birthday Atharva! 🎉</strong>';
         document.getElementById('blowAllBtn').classList.add('hidden');
         document.getElementById('relightBtn').classList.remove('hidden');
         playFanfare();
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 110, spread: 90, origin: { y: 0.65 } });
+          confetti({ particleCount: 100, spread: 85, gravity: 0.7, origin: { y: 0.65 } });
         }
       }
     }
@@ -801,7 +749,7 @@
     }
     renderCandles();
 
-    /* --- 1-TAP PENALTY KICK MINI-GAME --- */
+    /* --- 1-TAP WORLD CUP PENALTY KICK MINI-GAME --- */
     let goalsScored = 0;
     let isShooting = false;
 
@@ -829,7 +777,7 @@
           status.innerHTML = '<strong class="text-amber-300">⚽ GOOOAAAL! Messi-style finish for Atharva!</strong>';
           playFanfare();
           if (typeof confetti === 'function') {
-            confetti({ particleCount: 45, spread: 55, origin: { y: 0.75 } });
+            confetti({ particleCount: 45, spread: 55, gravity: 0.75, origin: { y: 0.75 } });
           }
         } else {
           status.innerHTML = '<span class="text-rose-300">🧤 Saved by the keeper! Try another corner!</span>';
@@ -878,11 +826,11 @@
       const icsContent = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Atharva 7th Birthday//EN',
+        'PRODID:-//Atharva 7 th Birthday//EN',
         'BEGIN:VEVENT',
         'DTSTART:20261212T180000Z',
         'DTEND:20261212T220000Z',
-        "SUMMARY:Atharva's 7th Birthday Party!",
+        "SUMMARY:Atharva's 7 th Birthday Party!",
         'LOCATION:741 Sheppard Avenue West, North York, ON, M3H 0C9 (Buzz 3020)',
         "DESCRIPTION:Join Ashish, Shweta & Atharva to celebrate Atharva turning 7! Intercom Buzz: 3020.",
         'END:VEVENT',
@@ -892,7 +840,7 @@
       const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'Atharva_7th_Birthday.ics';
+      link.download = 'Atharva_7_th_Birthday.ics';
       link.click();
       showToast('📅 Calendar invite downloaded!');
     }
@@ -905,7 +853,7 @@
         : '✅ RSVP Sent to Ashish & Shweta! Your spot is locked in.';
 
       const waMsg = encodeURIComponent(
-        `Hi Ashish & Shweta! 🎉 We just RSVPed for Atharva's 7th Birthday Party on Dec 12!\n` +
+        `Hi Ashish & Shweta! 🎉 We just RSVPed for Atharva's 7 th Birthday Party on Dec 12!\n` +
         `• Name: ${entry.name}\n` +
         `• Attending: ${entry.status} (${entry.count})\n` +
         (entry.wish ? `• Wish: "${entry.wish}"` : '')
@@ -962,7 +910,7 @@
 
         playFanfare();
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 95, spread: 80, origin: { y: 0.6 } });
+          confetti({ particleCount: 90, spread: 80, gravity: 0.75, origin: { y: 0.6 } });
         }
       }, 600);
     }
@@ -1011,7 +959,7 @@
       const blob = new Blob([csv], { type: 'text/csv' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'atharva_7th_rsvps.csv';
+      a.download = 'atharva_7_th_rsvps.csv';
       a.click();
     }
   </script>
