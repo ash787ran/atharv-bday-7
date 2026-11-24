@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Atharva Turns 7! | 3D VIP Birthday Invitation</title>
-  <meta property="og:title" content="You're Invited to Atharva's 7 th Birthday Party! 🎉" />
+  <meta property="og:title" content="You're Invited to Atharva's 7ᵗʰ Birthday Party! 🎉" />
   <meta property="og:description" content="Saturday, Dec 12, 2026 at 1:00 PM • 741 Sheppard Ave W, North York (Buzz 3020). Tap to open your VIP pass!" />
   <meta property="og:image" content="https://atharv-bday-7.vercel.app/atharvawithmessidress.jpg" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -112,6 +112,9 @@
 </head>
 <body class="antialiased selection:bg-amber-400 selection:text-slate-950" onclick="spawnClickSparkle(event)">
 
+  <!-- HIDDEN BACKGROUND SMACKDOWN MUSIC TRACK -->
+  <video id="bgMusicTrack" src="./smackdown.mp4" loop playsinline preload="auto" class="hidden"></video>
+
   <!-- LARGE FLOATING BIRTHDAY BALLOONS BACKGROUND -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
     <div class="absolute top-12 left-3 text-5xl sm:text-6xl opacity-45 balloon-1">🎈</div>
@@ -123,13 +126,13 @@
     <div class="absolute bottom-14 left-5 text-4xl sm:text-5xl opacity-35 balloon-1">🎂</div>
   </div>
 
-  <!-- FLOATING SOUND & FIREWORKS BAR -->
+  <!-- FLOATING ICON-ONLY FIREWORKS & MUSIC BAR -->
   <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
-    <button onclick="launchFireworks(event)" class="bg-amber-400 text-slate-950 px-3.5 py-1.5 rounded-full text-xs font-extrabold shadow-lg active:scale-95 transition">
-      🎆 Fireworks!
+    <button onclick="launchFireworks(event)" aria-label="Fireworks" title="Fireworks" class="bg-amber-400 text-slate-950 w-9 h-9 rounded-full text-base flex items-center justify-center shadow-lg active:scale-95 transition">
+      🎆
     </button>
     <button id="soundToggle" onclick="toggleSound(event)" class="bg-slate-900 border border-amber-400/50 text-amber-300 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg transition">
-      <span id="soundIcon">🔊</span> <span id="soundLabel">Sound ON</span>
+      <span id="soundIcon">🔊</span> <span id="soundLabel">Music ON</span>
     </button>
   </div>
 
@@ -138,7 +141,7 @@
     <div class="max-w-md w-full perspective-1200">
       <div class="envelope-box rounded-3xl p-7 text-center relative overflow-hidden">
         <div class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/50 text-amber-300 px-4 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase mb-5">
-          <span>🎈 7 TH BIRTHDAY INVITATION 🎈</span>
+          <span>🎈 7ᵗʰ BIRTHDAY INVITATION 🎈</span>
         </div>
 
         <div class="relative w-32 h-32 mx-auto mb-5">
@@ -151,7 +154,7 @@
 
         <h1 class="text-4xl sm:text-5xl font-display font-extrabold leading-tight mb-2">
           <span class="shimmer-gold">ATHARVA'S</span><br/>
-          <span class="text-white">7 TH BIRTHDAY!</span>
+          <span class="text-white">7ᵗʰ BIRTHDAY!</span>
         </h1>
         <p class="text-blue-200 text-sm font-medium mb-6">
           Saturday, Dec 12, 2026 • 1:00 PM
@@ -162,7 +165,7 @@
         </button>
 
         <button onclick="openInvitation(event, true)" class="mt-4 text-xs text-slate-400 hover:text-white underline">
-          Skip animation
+          Skip animation (Muted)
         </button>
       </div>
     </div>
@@ -179,7 +182,7 @@
 
       <h1 class="text-4xl sm:text-5xl font-display font-extrabold tracking-tight leading-none">
         YOU'RE INVITED TO<br/>
-        <span class="shimmer-gold">ATHARVA'S 7 TH!</span>
+        <span class="shimmer-gold">ATHARVA'S 7ᵗʰ!</span>
       </h1>
 
       <p class="text-slate-200 text-sm sm:text-base max-w-sm mx-auto leading-relaxed">
@@ -299,25 +302,25 @@
       </div>
     </section>
 
-    <!-- 4. INTERACTIVE 7 BIRTHDAY CANDLES -->
+    <!-- 4. INTERACTIVE 7 BIRTHDAY CANDLES (1 2 3 4 5 6 7) -->
     <section class="card-surface border-2 border-amber-400/40 rounded-3xl p-5 text-center">
       <div class="inline-block bg-amber-400/20 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
         🎂 Make a Birthday Wish
       </div>
       <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">Blow Out All 7 Candles!</h2>
-      <p id="candle-status" class="text-xs text-slate-300 mt-1 mb-4">Tap each candle flame (or hit the button below) for Atharva!</p>
+      <p id="candle-status" class="text-xs text-slate-300 mt-1 mb-4">Tap Blow or tap each candle flame (1 to 7) for Atharva!</p>
 
       <div class="relative max-w-xs mx-auto pt-8 pb-2">
         <div id="candles-row" class="flex justify-center items-end gap-3 sm:gap-4 px-2 relative z-10"></div>
         <div class="w-full h-14 bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 rounded-t-2xl border-b-4 border-white/40 flex items-center justify-center">
-          <span class="font-display font-bold text-white text-base tracking-wide">★ HAPPY 7 TH ATHARVA ★</span>
+          <span class="font-display font-bold text-white text-base tracking-wide">★ HAPPY 7ᵗʰ ATHARVA ★</span>
         </div>
         <div class="w-[106%] -ml-[3%] h-4 bg-slate-200 rounded-full"></div>
       </div>
 
       <div class="mt-4 flex justify-center gap-2">
-        <button id="blowAllBtn" onclick="blowAllCandles(event)" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-display font-bold text-base px-5 py-2.5 rounded-xl active:scale-95 transition">
-          🌬️ Blow All 7 Candles!
+        <button id="blowAllBtn" onclick="blowAllCandles(event)" class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-display font-extrabold text-base px-7 py-2.5 rounded-xl active:scale-95 transition shadow-lg">
+          🌬️ Blow
         </button>
         <button id="relightBtn" onclick="relightCandles(event)" class="hidden bg-slate-800 border border-slate-600 text-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl">
           🔥 Relight Candles
@@ -363,7 +366,7 @@
 
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Birthday Wish for Atharva (Optional)</label>
-          <input type="text" id="birthdayWish" placeholder="Happy 7 th Birthday Champ! 🎈🎂" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-4 py-3 text-sm text-white outline-none transition" />
+          <input type="text" id="birthdayWish" placeholder="Happy 7ᵗʰ Birthday Champ! 🎈🎂" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-4 py-3 text-sm text-white outline-none transition" />
         </div>
 
         <button type="submit" id="rsvpSubmitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-extrabold text-xl shadow-xl active:scale-95 transition">
@@ -448,7 +451,7 @@
     </section>
 
     <footer class="text-center text-xs text-slate-500 pt-2 pb-8 space-y-2">
-      <p>Hosted with ❤️ by Ashish & Shweta for Atharva's 7 th Birthday</p>
+      <p>Hosted with ❤️ by Ashish & Shweta for Atharva's 7ᵗʰ Birthday</p>
       <button onclick="openHostModal(event)" class="text-slate-600 hover:text-slate-400 underline text-[11px]">
         Host RSVP Log
       </button>
@@ -483,9 +486,10 @@
   </div>
 
   <script>
-    /* --- WEB AUDIO CHIMES --- */
+    /* --- BACKGROUND SMACKDOWN MUSIC & CHIMES --- */
     let soundEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const bgMusicTrack = document.getElementById('bgMusicTrack');
 
     function playTone(freq, type = 'sine', duration = 0.22, delay = 0) {
       if (!soundEnabled) return;
@@ -515,7 +519,15 @@
       if (e) e.stopPropagation();
       soundEnabled = !soundEnabled;
       document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
-      document.getElementById('soundLabel').textContent = soundEnabled ? 'Sound ON' : 'Muted';
+      document.getElementById('soundLabel').textContent = soundEnabled ? 'Music ON' : 'Muted';
+      if (bgMusicTrack) {
+        if (soundEnabled) {
+          bgMusicTrack.muted = false;
+          bgMusicTrack.play().catch(() => {});
+        } else {
+          bgMusicTrack.pause();
+        }
+      }
     }
 
     /* --- SLOW CONTINUOUS FIREWORKS & TAP SPARKLES --- */
@@ -576,7 +588,12 @@
         document.getElementById('soundIcon').textContent = '🔇';
         document.getElementById('soundLabel').textContent = 'Muted';
       } else {
-        playFanfare();
+        soundEnabled = true;
+        if (bgMusicTrack) {
+          bgMusicTrack.muted = false;
+          bgMusicTrack.volume = 0.75;
+          bgMusicTrack.play().catch(() => {});
+        }
         if (typeof confetti === 'function') {
           confetti({ particleCount: 85, spread: 75, gravity: 0.75, origin: { y: 0.6 } });
         }
@@ -690,15 +707,17 @@
       document.getElementById('lightboxModal').classList.add('hidden');
     }
 
-    /* --- 7 BIRTHDAY CANDLES --- */
+    /* --- 7 BIRTHDAY CANDLES (SEQUENTIAL 1 2 3 4 5 6 7) --- */
     const totalCandles = 7;
     let blownCount = 0;
+    let isBlowingSequence = false;
     const candleColors = ['bg-blue-400', 'bg-amber-400', 'bg-emerald-400', 'bg-red-400', 'bg-purple-400', 'bg-cyan-400', 'bg-pink-400'];
 
     function renderCandles() {
       const row = document.getElementById('candles-row');
       row.innerHTML = '';
       blownCount = 0;
+      isBlowingSequence = false;
       for (let i = 0; i < totalCandles; i++) {
         const candle = document.createElement('div');
         candle.className = 'flex flex-col items-center cursor-pointer relative';
@@ -707,12 +726,16 @@
           <div id="smoke-${i}" class="w-3 h-3 rounded-full bg-slate-300/70 opacity-0 absolute -top-6 pointer-events-none"></div>
           <div id="flame-${i}" class="flame w-3.5 h-5 mb-0.5"></div>
           <div class="w-0.5 h-1.5 bg-slate-800"></div>
-          <div class="w-3 h-10 ${candleColors[i]} rounded-t-sm border-x border-white/30"></div>
+          <div class="w-4 h-11 ${candleColors[i]} rounded-t-sm border-x border-white/30 flex items-center justify-center text-[10px] font-extrabold text-slate-950 shadow">
+            ${i + 1}
+          </div>
         `;
         row.appendChild(candle);
       }
-      document.getElementById('candle-status').textContent = 'Tap each candle flame (or hit the button below) for Atharva!';
-      document.getElementById('blowAllBtn').classList.remove('hidden');
+      document.getElementById('candle-status').textContent = 'Tap Blow or tap each candle flame (1 to 7) for Atharva!';
+      const blowBtn = document.getElementById('blowAllBtn');
+      blowBtn.disabled = false;
+      blowBtn.classList.remove('hidden', 'opacity-60');
       document.getElementById('relightBtn').classList.add('hidden');
     }
 
@@ -721,11 +744,14 @@
       if (!flame || flame.classList.contains('blown-out')) return;
       flame.classList.add('blown-out');
       document.getElementById(`smoke-${idx}`).classList.add('smoke-puff');
-      playTone(320 - idx * 15, 'sine', 0.15);
+      playTone(300 + idx * 45, 'sine', 0.16);
       blownCount++;
 
-      if (blownCount === totalCandles) {
-        document.getElementById('candle-status').innerHTML = '<strong class="text-amber-400">🎉 WISH GRANTED! Happy 7 th Birthday Atharva! 🎉</strong>';
+      const seqLabels = Array.from({ length: blownCount }, (_, k) => k + 1).join(' ');
+      if (blownCount < totalCandles) {
+        document.getElementById('candle-status').innerHTML = `<span class="text-amber-300 font-bold text-sm tracking-widest">${seqLabels} ...</span>`;
+      } else {
+        document.getElementById('candle-status').innerHTML = '<strong class="text-amber-400">🎉 1 2 3 4 5 6 7 — WISH GRANTED! Happy 7ᵗʰ Birthday Atharva! 🎉</strong>';
         document.getElementById('blowAllBtn').classList.add('hidden');
         document.getElementById('relightBtn').classList.remove('hidden');
         playFanfare();
@@ -737,8 +763,19 @@
 
     function blowAllCandles(e) {
       if (e) e.stopPropagation();
+      if (isBlowingSequence) return;
+      isBlowingSequence = true;
+      const blowBtn = document.getElementById('blowAllBtn');
+      blowBtn.disabled = true;
+      blowBtn.classList.add('opacity-60');
+
+      let step = 0;
       for (let i = 0; i < totalCandles; i++) {
-        setTimeout(() => blowCandle(i), i * 80);
+        const flame = document.getElementById(`flame-${i}`);
+        if (flame && !flame.classList.contains('blown-out')) {
+          setTimeout(() => blowCandle(i), step * 420);
+          step++;
+        }
       }
     }
 
@@ -826,11 +863,11 @@
       const icsContent = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Atharva 7 th Birthday//EN',
+        'PRODID:-//Atharva 7th Birthday//EN',
         'BEGIN:VEVENT',
         'DTSTART:20261212T180000Z',
         'DTEND:20261212T220000Z',
-        "SUMMARY:Atharva's 7 th Birthday Party!",
+        "SUMMARY:Atharva's 7ᵗʰ Birthday Party!",
         'LOCATION:741 Sheppard Avenue West, North York, ON, M3H 0C9 (Buzz 3020)',
         "DESCRIPTION:Join Ashish, Shweta & Atharva to celebrate Atharva turning 7! Intercom Buzz: 3020.",
         'END:VEVENT',
@@ -840,7 +877,7 @@
       const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'Atharva_7_th_Birthday.ics';
+      link.download = 'Atharva_7th_Birthday.ics';
       link.click();
       showToast('📅 Calendar invite downloaded!');
     }
@@ -853,7 +890,7 @@
         : '✅ RSVP Sent to Ashish & Shweta! Your spot is locked in.';
 
       const waMsg = encodeURIComponent(
-        `Hi Ashish & Shweta! 🎉 We just RSVPed for Atharva's 7 th Birthday Party on Dec 12!\n` +
+        `Hi Ashish & Shweta! 🎉 We just RSVPed for Atharva's 7ᵗʰ Birthday Party on Dec 12!\n` +
         `• Name: ${entry.name}\n` +
         `• Attending: ${entry.status} (${entry.count})\n` +
         (entry.wish ? `• Wish: "${entry.wish}"` : '')
@@ -959,7 +996,7 @@
       const blob = new Blob([csv], { type: 'text/csv' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'atharva_7_th_rsvps.csv';
+      a.download = 'atharva_7th_rsvps.csv';
       a.click();
     }
   </script>
