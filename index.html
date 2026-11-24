@@ -49,6 +49,13 @@
       to { background-position: 200% center; }
     }
 
+    /* Cover CTA Subtle Pulse */
+    @keyframes ctaGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.55); }
+      50% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
+    }
+    .cta-pulse { animation: ctaGlow 2.2s infinite; }
+
     /* Envelope Cover */
     .perspective-1200 { perspective: 1200px; }
     #envelope-overlay {
@@ -62,8 +69,8 @@
     }
     .envelope-box {
       background: linear-gradient(145deg, #1d4ed8 0%, #312e81 50%, #0f172a 100%);
-      border: 3px solid rgba(251, 191, 36, 0.8);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+      border: 3px solid rgba(251, 191, 36, 0.85);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
     }
 
     /* Smooth Card Surfaces */
@@ -105,6 +112,10 @@
       border: 2px solid rgba(251, 191, 36, 0.8);
     }
 
+    /* Hide scrollbar for horizontal milestone pills */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
     /* Penalty Shootout Ball */
     #soccer-ball { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
     #goalie { transition: transform 0.4s ease-out; }
@@ -140,11 +151,15 @@
   <div id="envelope-overlay" class="fixed inset-0 z-40 flex flex-col items-center justify-center p-5 bg-slate-950">
     <div class="max-w-md w-full perspective-1200">
       <div class="envelope-box rounded-3xl p-7 text-center relative overflow-hidden">
-        <div class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/50 text-amber-300 px-4 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase mb-5">
+        <!-- Decorative Corner Balloons -->
+        <span class="absolute top-3 left-4 text-2xl opacity-75 balloon-1 pointer-events-none">🎈</span>
+        <span class="absolute top-3 right-4 text-2xl opacity-75 balloon-2 pointer-events-none">🎈</span>
+
+        <div class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/50 text-amber-300 px-4 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase mb-4">
           <span>🎈 7ᵗʰ BIRTHDAY INVITATION 🎈</span>
         </div>
 
-        <div class="relative w-32 h-32 mx-auto mb-5">
+        <div class="relative w-32 h-32 mx-auto mb-4">
           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-blue-500"></div>
           <img src="./IMG_8437 2.jpg" alt="Atharva" class="relative w-full h-full object-cover object-right rounded-full p-1 bg-slate-950" />
           <div class="absolute -bottom-1 -right-1 bg-amber-400 text-slate-950 font-display font-extrabold text-lg w-10 h-10 rounded-full flex items-center justify-center border-2 border-slate-950 shadow-lg">
@@ -152,20 +167,27 @@
           </div>
         </div>
 
-        <h1 class="text-4xl sm:text-5xl font-display font-extrabold leading-tight mb-2">
+        <h1 class="text-4xl sm:text-5xl font-display font-extrabold leading-tight mb-1.5">
           <span class="shimmer-gold">ATHARVA'S</span><br/>
           <span class="text-white">7ᵗʰ BIRTHDAY!</span>
         </h1>
-        <p class="text-blue-200 text-sm font-medium mb-6">
-          Saturday, Dec 12, 2026 • 1:00 PM
+
+        <p class="text-amber-200/90 text-xs font-bold tracking-wide mb-3">
+          Hosted with ❤️ by Ashish &amp; Shweta
         </p>
 
-        <button onclick="openInvitation(event)" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-extrabold text-xl tracking-wide shadow-xl active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-slate-950/65 border border-blue-400/35 px-3.5 py-1.5 rounded-full text-xs text-blue-100 font-semibold mb-6">
+          <span>🗓️ Sat, Dec 12, 2026 • 1:00 PM</span>
+          <span class="text-amber-400">•</span>
+          <span>📍 North York, ON</span>
+        </div>
+
+        <button onclick="openInvitation(event)" class="cta-pulse w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-extrabold text-xl tracking-wide shadow-xl active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer">
           <span>🎁 TAP TO OPEN INVITE</span>
         </button>
 
         <button onclick="openInvitation(event, true)" class="mt-4 text-xs text-slate-400 hover:text-white underline">
-          Skip animation (Muted)
+          Open quietly 🔇
         </button>
       </div>
     </div>
@@ -186,14 +208,14 @@
       </h1>
 
       <p class="text-slate-200 text-sm sm:text-base max-w-sm mx-auto leading-relaxed">
-        Join <strong class="text-white">Ashish, Shweta & Atharva</strong> for a joyful afternoon of games, music, cake & celebration!
+        Join <strong class="text-white">Ashish, Shweta &amp; Atharva</strong> for a joyful afternoon of games, music, cake &amp; celebration!
       </p>
     </section>
 
     <!-- 2. PARTY DETAILS, CALENDAR & COUNTDOWN (AT THE TOP) -->
     <section class="card-details border-2 border-blue-400/50 rounded-3xl p-5 space-y-4">
       <div class="flex items-center justify-between border-b border-slate-700/80 pb-2.5">
-        <h2 class="font-display font-bold text-2xl text-white">📍 When & Where</h2>
+        <h2 class="font-display font-bold text-2xl text-white">📍 When &amp; Where</h2>
         <a href="#rsvp-section" class="bg-amber-400 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full shadow hover:brightness-110 transition">
           🎟️ Jump to RSVP ↓
         </a>
@@ -205,9 +227,9 @@
             🗓️
           </div>
           <div>
-            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Date & Kick-Off Time</div>
+            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Date &amp; Kick-Off Time</div>
             <div class="font-display font-bold text-xl text-white leading-tight">Saturday, December 12, 2026</div>
-            <div class="text-xs text-slate-300 mt-0.5">Starts at <strong class="text-white">1:00 PM EST</strong> • Cake, Games & Feast!</div>
+            <div class="text-xs text-slate-300 mt-0.5">Starts at <strong class="text-white">1:00 PM EST</strong> • Cake, Games &amp; Feast!</div>
           </div>
         </div>
 
@@ -270,7 +292,7 @@
       </div>
 
       <div id="gallery-touch-zone" class="relative rounded-2xl overflow-hidden bg-slate-950 aspect-[4/5] border border-slate-800 select-none touch-pan-y">
-        <img id="gallery-main-img" src="./atharvawithmessidress.jpg" alt="Atharva Highlight" onclick="openLightbox()" class="w-full h-full object-cover transition-opacity duration-300 cursor-zoom-in" />
+        <img id="gallery-main-img" src="./atharvawithmessidress.jpg" alt="Atharva Highlight" onclick="openLightbox('gallery')" class="w-full h-full object-cover transition-opacity duration-300 cursor-zoom-in" />
 
         <button onclick="changeSlide(-1, event)" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/80 border border-white/20 text-white font-bold flex items-center justify-center hover:bg-amber-400 hover:text-slate-950 transition shadow-lg">
           ‹
@@ -302,7 +324,68 @@
       </div>
     </section>
 
-    <!-- 4. INTERACTIVE 7 BIRTHDAY CANDLES (1 2 3 4 5 6 7) -->
+    <!-- 4. THROUGH THE YEARS TIMELINE (AGE 0 TO 7th) -->
+    <section class="card-details border-2 border-blue-400/50 rounded-3xl p-4 space-y-3.5">
+      <div class="flex items-center justify-between px-1">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-400">2019 – 2026 MILESTONES</span>
+          <h2 class="font-display font-bold text-2xl text-white leading-tight">👶 Through the Years: Age 0 → 7ᵗʰ</h2>
+        </div>
+        <span id="timeline-counter" class="text-xs font-bold text-blue-200 bg-slate-950/80 px-2.5 py-1 rounded-full border border-blue-400/30">Age 0</span>
+      </div>
+
+      <!-- Interactive Year Selector Pills -->
+      <div id="timeline-pills" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="selectMilestone(0, event)" class="ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-extrabold bg-amber-400 text-slate-950 transition">Age 0</button>
+        <button onclick="selectMilestone(1, event)" class="ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-slate-300 border border-slate-700 transition">1 Yr</button>
+        <button onclick="selectMilestone(2, event)" class="ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-slate-300 border border-slate-700 transition">2 Yrs</button>
+        <button onclick="selectMilestone(3, event)" class="ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-slate-300 border border-slate-700 transition">3–4 Yrs</button>
+        <button onclick="selectMilestone(4, event)" class="ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-slate-300 border border-slate-700 transition">5 Yrs</button>
+        <button onclick="selectMilestone(5, event)" class="ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-slate-300 border border-slate-700 transition">6 Yrs</button>
+        <button onclick="selectMilestone(6, event)" class="ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-amber-300 border border-amber-400/50 transition">7ᵗʰ 🔒</button>
+      </div>
+
+      <!-- Milestone Viewer Card -->
+      <div id="timeline-touch-zone" class="relative rounded-2xl overflow-hidden bg-slate-950 aspect-[4/5] border border-slate-800 select-none touch-pan-y">
+        <!-- Photo View (Milestones 0-5) -->
+        <div id="timeline-photo-wrap" class="w-full h-full">
+          <img id="timeline-img" src="./be237819-2ed1-49a0-9060-69a8e4adbf4e.jpeg" loading="lazy" alt="Atharva Milestone" onclick="openLightbox('timeline')" class="w-full h-full object-cover object-top transition-opacity duration-300 cursor-zoom-in" />
+        </div>
+
+        <!-- Mystery 7th Birthday Card (Milestone 6) -->
+        <div id="timeline-mystery-wrap" class="hidden w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-indigo-950 via-slate-900 to-blue-950">
+          <div class="w-20 h-20 rounded-full bg-amber-400/20 border-2 border-amber-400 flex items-center justify-center text-4xl mb-4 shadow-lg">
+            🎂
+          </div>
+          <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest mb-2">
+            CHAPTER 7 UNLOCKING SOON
+          </span>
+          <h3 class="font-display font-extrabold text-3xl text-white leading-tight">
+            7ᵗʰ Birthday Memory<br/><span class="text-amber-300">Loading...</span>
+          </h3>
+          <p class="text-xs text-blue-200 max-w-xs mt-2 leading-relaxed">
+            Join us on <strong class="text-white">Saturday, Dec 12, 2026 at 1:00 PM</strong> to make this next chapter unforgettable!
+          </p>
+        </div>
+
+        <!-- Prev / Next Milestone Controls -->
+        <button onclick="changeMilestone(-1, event)" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-950/80 border border-white/20 text-white font-bold flex items-center justify-center hover:bg-amber-400 hover:text-slate-950 transition shadow-lg">
+          ‹
+        </button>
+        <button onclick="changeMilestone(1, event)" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-950/80 border border-white/20 text-white font-bold flex items-center justify-center hover:bg-amber-400 hover:text-slate-950 transition shadow-lg">
+          ›
+        </button>
+
+        <!-- Caption Bar -->
+        <div id="timeline-caption-bar" class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent p-4">
+          <span id="timeline-badge" class="bg-blue-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase tracking-wider">👶 Age 0 • Newborn</span>
+          <h3 id="timeline-title" class="font-display font-bold text-xl text-white mt-1">Day 1: Welcome to the World!</h3>
+          <p class="text-[11px] text-slate-300">Tap year pills above or swipe to travel through time</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE 7 BIRTHDAY CANDLES (1 2 3 4 5 6 7) -->
     <section class="card-surface border-2 border-amber-400/40 rounded-3xl p-5 text-center">
       <div class="inline-block bg-amber-400/20 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
         🎂 Make a Birthday Wish
@@ -328,20 +411,20 @@
       </div>
     </section>
 
-    <!-- 5. DUPLICATE-SAFE RSVP & HOLOGRAPHIC VIP PASS -->
+    <!-- 6. DUPLICATE-SAFE RSVP & HOLOGRAPHIC VIP PASS -->
     <section id="rsvp-section" class="card-surface border-2 border-amber-400/55 rounded-3xl p-6">
       <div class="text-center mb-5">
         <span class="bg-amber-400/20 text-amber-300 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
           🎟️ Claim Your VIP Pass
         </span>
         <h2 class="font-display font-bold text-2xl sm:text-3xl text-white mt-2">RSVP for Atharva's Party</h2>
-        <p id="rsvp-subtitle" class="text-xs text-slate-400 mt-1">Confirm your spot & send your response straight to Ashish & Shweta!</p>
+        <p id="rsvp-subtitle" class="text-xs text-slate-400 mt-1">Confirm your spot &amp; send your response straight to Ashish &amp; Shweta!</p>
       </div>
 
       <form id="rsvpForm" onsubmit="submitRSVP(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Guest / Family Name *</label>
-          <input type="text" id="guestName" required placeholder="e.g., Pranay & Mousami" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-4 py-3 text-sm text-white outline-none transition" />
+          <input type="text" id="guestName" required placeholder="e.g., Pranay &amp; Mousami" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-4 py-3 text-sm text-white outline-none transition" />
         </div>
 
         <div class="grid grid-cols-2 gap-3">
@@ -370,13 +453,13 @@
         </div>
 
         <button type="submit" id="rsvpSubmitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-slate-950 font-display font-extrabold text-xl shadow-xl active:scale-95 transition">
-          🚀 Send RSVP & Unlock VIP Ticket
+          🚀 Send RSVP &amp; Unlock VIP Ticket
         </button>
       </form>
 
       <div id="vip-pass-container" class="hidden mt-4 space-y-4">
         <div id="rsvp-confirm-banner" class="bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-bold px-4 py-2.5 rounded-2xl text-center">
-          ✅ RSVP Sent to Ashish & Shweta! Your spot is locked in.
+          ✅ RSVP Sent to Ashish &amp; Shweta! Your spot is locked in.
         </div>
 
         <div class="holo-ticket rounded-3xl p-5 relative overflow-hidden">
@@ -400,11 +483,11 @@
               <span id="pass-count" class="font-bold text-amber-300"></span>
             </div>
             <div class="flex justify-between">
-              <span class="text-slate-400">Date & Time:</span>
+              <span class="text-slate-400">Date &amp; Time:</span>
               <span class="font-bold text-white">Sat, Dec 12 • 1:00 PM</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-slate-400">Address & Buzz:</span>
+              <span class="text-slate-400">Address &amp; Buzz:</span>
               <span class="font-bold text-emerald-300">741 Sheppard W (Buzz 3020)</span>
             </div>
           </div>
@@ -421,7 +504,7 @@
       </div>
     </section>
 
-    <!-- 6. 1-TAP WORLD CUP PENALTY KICK MINI-GAME -->
+    <!-- 7. 1-TAP WORLD CUP PENALTY KICK MINI-GAME -->
     <section class="card-surface border-2 border-emerald-400/40 rounded-3xl p-5 text-center">
       <span class="bg-emerald-400/20 text-emerald-300 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
         ⚽ Kids' Fun Zone
@@ -447,7 +530,7 @@
     </section>
 
     <footer class="text-center text-xs text-slate-500 pt-2 pb-8 space-y-2">
-      <p>Hosted with ❤️ by Ashish & Shweta for Atharva's 7ᵗʰ Birthday</p>
+      <p>Hosted with ❤️ by Ashish &amp; Shweta for Atharva's 7ᵗʰ Birthday</p>
       <button onclick="openHostModal(event)" class="text-slate-600 hover:text-slate-400 underline text-[11px]">
         Host RSVP Log
       </button>
@@ -691,11 +774,136 @@
       }
     }, 5500);
 
-    function openLightbox() {
+    /* --- THROUGH THE YEARS TIMELINE (AGE 0 -> 7th) --- */
+    const milestones = [
+      {
+        pill: 'Age 0',
+        src: './be237819-2ed1-49a0-9060-69a8e4adbf4e.jpeg',
+        pos: 'object-top',
+        badge: '👶 Age 0 • Newborn',
+        title: 'Day 1: Welcome to the World!'
+      },
+      {
+        pill: '1 Yr',
+        src: './81bcbef9-a22e-482b-a776-3d4968a632b6.jpeg',
+        pos: 'object-top',
+        badge: '👣 Age 1 • Toddler Explorer',
+        title: 'First Steps & Big Curiosity'
+      },
+      {
+        pill: '2 Yrs',
+        src: './47189a8e-7a0e-4859-a339-0b53507f4297.jpeg',
+        pos: 'object-top',
+        badge: '💛 Age 2 • Little Gentleman',
+        title: 'Celebration Time with Mom'
+      },
+      {
+        pill: '3–4 Yrs',
+        src: './5f09dee5-6299-4cdf-8762-72598437abac.jpeg',
+        pos: 'object-center',
+        badge: '🎂 Ages 3–4 • Party Prince',
+        title: 'Double Cake Birthday Bash!'
+      },
+      {
+        pill: '5 Yrs',
+        src: './6a56a2e6-2c8c-4413-848d-23885d6ccf74.jpeg',
+        pos: 'object-center',
+        badge: '🧱 Age 5 • High Five!',
+        title: 'Minecraft Cake Boss with Mom & Dad'
+      },
+      {
+        pill: '6 Yrs',
+        src: './b6c24673-6683-4770-8bf2-6375b06a41dd.jpeg',
+        pos: 'object-top',
+        badge: '⭐ Age 6 • Big Kid Era',
+        title: 'All Smiles & Ready for Lucky 7!'
+      },
+      {
+        pill: '7ᵗʰ 🔒',
+        mystery: true,
+        badge: '🎉 Age 7 • Dec 12, 2026',
+        title: 'Celebrating Live With You!'
+      }
+    ];
+    let currentMilestone = 0;
+
+    function updateTimeline() {
+      const m = milestones[currentMilestone];
+      document.getElementById('timeline-counter').textContent = m.pill;
+
+      document.querySelectorAll('.ms-pill').forEach((btn, idx) => {
+        if (idx === currentMilestone) {
+          btn.className = 'ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-extrabold bg-amber-400 text-slate-950 shadow transition';
+        } else {
+          btn.className = 'ms-pill shrink-0 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-slate-300 border border-slate-700 transition';
+        }
+      });
+
+      const photoWrap = document.getElementById('timeline-photo-wrap');
+      const mysteryWrap = document.getElementById('timeline-mystery-wrap');
+      const captionBar = document.getElementById('timeline-caption-bar');
+
+      if (m.mystery) {
+        photoWrap.classList.add('hidden');
+        mysteryWrap.classList.remove('hidden');
+        captionBar.classList.add('hidden');
+      } else {
+        mysteryWrap.classList.add('hidden');
+        photoWrap.classList.remove('hidden');
+        captionBar.classList.remove('hidden');
+
+        const img = document.getElementById('timeline-img');
+        img.style.opacity = '0.35';
+        setTimeout(() => {
+          img.src = m.src;
+          img.className = `w-full h-full object-cover ${m.pos} transition-opacity duration-300 cursor-zoom-in`;
+          img.style.opacity = '1';
+        }, 110);
+
+        document.getElementById('timeline-badge').textContent = m.badge;
+        document.getElementById('timeline-title').textContent = m.title;
+      }
+    }
+
+    function selectMilestone(idx, e) {
+      if (e) e.stopPropagation();
+      currentMilestone = idx;
+      updateTimeline();
+      playTone(540 + idx * 35, 'sine', 0.12);
+    }
+
+    function changeMilestone(dir, e) {
+      if (e) e.stopPropagation();
+      currentMilestone = (currentMilestone + dir + milestones.length) % milestones.length;
+      updateTimeline();
+      playTone(560, 'sine', 0.12);
+    }
+
+    let tlTouchStartX = 0;
+    const tlTouchZone = document.getElementById('timeline-touch-zone');
+    tlTouchZone.addEventListener('touchstart', (e) => {
+      tlTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    tlTouchZone.addEventListener('touchend', (e) => {
+      const diff = tlTouchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) {
+        changeMilestone(diff > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+
+    /* --- FULL-SCREEN PHOTO LIGHTBOX --- */
+    function openLightbox(sourceType = 'gallery') {
       clearInterval(galleryTimer);
-      const s = slides[currentSlide];
-      document.getElementById('lightbox-img').src = s.src;
-      document.getElementById('lightbox-caption').textContent = s.title;
+      if (sourceType === 'timeline') {
+        const m = milestones[currentMilestone];
+        if (m.mystery) return;
+        document.getElementById('lightbox-img').src = m.src;
+        document.getElementById('lightbox-caption').textContent = `${m.pill} — ${m.title}`;
+      } else {
+        const s = slides[currentSlide];
+        document.getElementById('lightbox-img').src = s.src;
+        document.getElementById('lightbox-caption').textContent = s.title;
+      }
       document.getElementById('lightboxModal').classList.remove('hidden');
     }
 
